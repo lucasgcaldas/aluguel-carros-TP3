@@ -8,7 +8,6 @@ public class Cliente extends Pessoa{
         this.cidade = cidade;
         this.categoriaHabilitacao = categoriaHabilitacao;
     }
-
     public String getCidade() {
         return cidade;
     }
@@ -23,5 +22,16 @@ public class Cliente extends Pessoa{
 
     public void setCategoriaHabilitacao(CatHabEnum categoriaHabilitacao) {
         this.categoriaHabilitacao = categoriaHabilitacao;
+    }
+
+    @Override
+    public String toString() {
+        return "Cliente{" +
+                "nome=" + this.getNome() +
+                ", cpf=" + this.getCpf() +
+                ", email=" + this.getEmail() +
+                ", cidade='" + cidade + '\'' +
+                ", categoriaHabilitacao=" + categoriaHabilitacao +
+                '}';
     }
 }

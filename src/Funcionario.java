@@ -24,4 +24,15 @@ public class Funcionario extends Pessoa{
     public void setCargo(CargoEnum cargo) {
         this.cargo = cargo;
     }
+
+    @Override
+    public String toString() {
+        return "Funcionario{" +
+                "nome=" + this.getNome() +
+                ", cpf=" + this.getCpf() +
+                ", email=" + this.getEmail() +
+                ", salario=" + salario +
+                ", cargo=" + cargo +
+                '}';
+    }
 }
