@@ -34,5 +34,39 @@ public class Application {
 
         // Deletar Pessoa
         f1.deletarPessoa("123.456.789-10");
+
+        System.out.println();
+        // Carregando dados aleatorios no sistema - Carro
+        Carro carro1 = new Carro("Fiat", "Argo","KNI-1234" ,"2018", 90.00);
+        Carro carro2 = new Carro("VW", "Gol","JJK-1234" ,"2019", 90.00);
+        Carro carro3 = new Carro("Hyunday", "HB20","ABC-1234" ,"2017", 75.00);
+        Carro carro4 = new Carro("Renault", "Kwid","CCT-1234" ,"2020", 75.00);
+        Carro carro5 = new Carro("Chevrolet", "Onix","AAB-1234" ,"2020", 100.00);
+
+        // Cadastra Carro
+        carro1.cadastrarCarro();
+        carro2.cadastrarCarro();
+        carro3.cadastrarCarro();
+        carro4.cadastrarCarro();
+        carro5.cadastrarCarro();
+
+        // Ler Carro
+        carro1.lerCarro("CCT-1234");
+        carro1.lerCarro("AAB-1234");
+        carro1.lerCarro("JJK-1234");
+
+        // Atualiza Carro
+        carro1.atualizaCarro("AAB-1234", 108.00);
+        carro1.atualizaCarro("ABC-1234", 80.00);
+
+        // Deleta Carro
+        carro1.deletarCarro("KNI-1234");
+
+        // Total de Carros existentes
+        carro2.totalCarros();
+
+        // Total de Carros Alugados
+
+        // Total de Carros disponiveis
     }
 }
