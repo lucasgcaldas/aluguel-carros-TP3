@@ -23,13 +23,14 @@ public class Carro {
         System.out.println("O carro " + this.getModelo() + " foi cadastrado!");
     }
 
-    public void lerCarro(String placa) {
+    public Carro lerCarro(String placa) {
         for (Carro carro : carroSet) {
             if (placa.equals(carro.getPlaca())) {
-                return;
+                return carro;
             }
         }
         System.out.println("Carro nao encontrado!");
+        return null;
     }
 
     public void atualizaCarro(String placa, Double valorDiaria) {
@@ -51,16 +52,17 @@ public class Carro {
         }
     }
 
-    public void totalCarros() {
-        System.out.println("O total de carros existentes e: " + carroSet.size());
+    public int totalCarros() {
+        return carroSet.size();
     }
 
-    public void totalCarrosAlugados() {
-        System.out.println("O total de carros alugados e: " + carroSet.size());
+    public int totalCarrosAlugados() {
+        return Aluguel.aluguelList.size();
     }
 
     public void totalCarrosDisp() {
-        System.out.println("O total de carros alugados e: " + carroSet.size());
+        int totalCarrosAlugados = totalCarrosAlugados();
+        System.out.println("O total de carros disponiveis = " + (totalCarros() - totalCarrosAlugados));
     }
 
     public String getMarca() {

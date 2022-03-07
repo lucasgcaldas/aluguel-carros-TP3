@@ -1,4 +1,4 @@
-public class Funcionario extends Pessoa{
+public class Funcionario extends Pessoa {
 
     private Double salario;
     private CargoEnum cargo;

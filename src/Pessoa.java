@@ -1,4 +1,5 @@
-import java.util.*;
+import java.util.HashSet;
+import java.util.Set;
 
 public abstract class Pessoa {
 
@@ -20,9 +21,9 @@ public abstract class Pessoa {
         System.out.println("A pessoa " + this.getNome() + " foi cadastrada!");
     }
 
-    public Pessoa lerPessoa(String cpf){
-        for (Pessoa pessoa : pessoaSet){
-            if (cpf.equals(pessoa.getCpf())){
+    public Pessoa lerPessoa(String cpf) {
+        for (Pessoa pessoa : pessoaSet) {
+            if (cpf.equals(pessoa.getCpf())) {
                 return pessoa;
             }
         }
@@ -30,14 +31,16 @@ public abstract class Pessoa {
         return null;
     }
 
-    public void atualizaPessoa(String cpf, String novoNome, String novoEmail, String novaSenha){
-        for (Pessoa pessoa : pessoaSet){
-            if (cpf.equals(pessoa.getCpf())){
-                if (novoNome != null){
+    public void atualizaPessoa(String cpf, String novoNome, String novoEmail, String novaSenha) {
+        for (Pessoa pessoa : pessoaSet) {
+            if (cpf.equals(pessoa.getCpf())) {
+                if (novoNome != null) {
                     pessoa.setNome(novoNome);
-                } if (novoEmail != null){
+                }
+                if (novoEmail != null) {
                     pessoa.setEmail(novoEmail);
-                } if (novaSenha != null){
+                }
+                if (novaSenha != null) {
                     pessoa.setSenha(novaSenha);
                 }
                 System.out.println("A pessoa " + pessoa.getNome() + " esta atualziada!");
@@ -45,12 +48,12 @@ public abstract class Pessoa {
         }
     }
 
-    public void deletarPessoa(String cpf){
-        for (Pessoa pessoa : pessoaSet){
-            if (cpf.equals(pessoa.getCpf())){
-               System.out.println("A pessoa " + pessoa.getNome() + " foi removida!");
-               pessoaSet.remove(pessoa);
-               break;
+    public void deletarPessoa(String cpf) {
+        for (Pessoa pessoa : pessoaSet) {
+            if (cpf.equals(pessoa.getCpf())) {
+                System.out.println("A pessoa " + pessoa.getNome() + " foi removida!");
+                pessoaSet.remove(pessoa);
+                break;
             }
         }
     }

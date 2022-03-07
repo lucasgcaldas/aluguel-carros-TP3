@@ -1,4 +1,4 @@
-public class Cliente extends Pessoa{
+public class Cliente extends Pessoa {
 
     private String cidade;
     private CatHabEnum categoriaHabilitacao;
@@ -8,6 +8,7 @@ public class Cliente extends Pessoa{
         this.cidade = cidade;
         this.categoriaHabilitacao = categoriaHabilitacao;
     }
+
     public String getCidade() {
         return cidade;
     }
