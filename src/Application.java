@@ -48,6 +48,8 @@ public class Application {
         System.out.println(funcionario2.deletarPessoa("123.888.975-00"));
 
         System.out.println();
+        System.out.println("###############################################");
+        System.out.println();
         // Carregando dados aleatorios no sistema - Carro
         Carro carro1 = new Carro("Fiat", "Argo", "KNI-1234", "2018", 90.00);
         Carro carro2 = new Carro("VW", "Gol", "JJK-1234", "2019", 90.00);
@@ -56,35 +58,44 @@ public class Application {
         Carro carro5 = new Carro("Chevrolet", "Onix", "AAB-1234", "2020", 100.00);
 
         // Cadastra Carro
-        carro1.cadastrarCarro();
-        carro2.cadastrarCarro();
-        carro3.cadastrarCarro();
-        carro4.cadastrarCarro();
-        carro5.cadastrarCarro();
+        funcionario1.cadastrarCarro(carro1);
+        funcionario1.cadastrarCarro(carro2);
+        funcionario1.cadastrarCarro(carro3);
+        funcionario2.cadastrarCarro(carro4);
+        funcionario2.cadastrarCarro(carro5);
 
         // Ler Carro
-        System.out.println(carro1.lerCarro("CCT-1234"));
-        System.out.println(carro1.lerCarro("AAB-1234"));
-        System.out.println(carro1.lerCarro("JJK-1234"));
+        System.out.println(funcionario1.lerCarro("CCT-1234"));
+        System.out.println(funcionario1.lerCarro("AAB-1234"));
+        System.out.println(funcionario2.lerCarro("JJK-1234"));
 
         // Atualiza Carro
-        carro1.atualizaCarro("AAB-1234", 108.00);
-        carro1.atualizaCarro("ABC-1234", 80.00);
+        funcionario1.atualizaCarro("AAB-1234", 108.00);
+        funcionario2.atualizaCarro("ABC-1234", 80.00);
 
         // Deleta Carro
-        carro1.deletarCarro("KNI-1234");
+        funcionario1.deletarCarro("KNI-1234");
 
         // Total de Carros existentes
-        carro2.totalCarros();
+        funcionario2.totalCarros();
 
+        // Total de Carros disponiveis
+        funcionario2.totalCarrosDisp();
+
+        System.out.println();
+        System.out.println("###############################################");
         System.out.println();
         // Carregando dados aleatorios no sistema - Aluguel
         Aluguel aluguel1 = new Aluguel(1, funcionario1, cliente1, carro1, "Asa Sul", 3, "Asa Sul");
         Aluguel aluguel2 = new Aluguel(2, funcionario2, cliente2, carro2, "Guara 2", 3, "Asa Sul");
+        Aluguel aluguel3 = new Aluguel(3, funcionario1, cliente2, carro3, "Guara 1", 3, "Cruzeiro");
+        Aluguel aluguel4 = new Aluguel(4, funcionario2, cliente2, carro4, "Taguatinga", 3, "Asa Norte");
 
         // Cadastra Aluguel
         funcionario1.cadastrarAluguel(aluguel1);
         funcionario2.cadastrarAluguel(aluguel2);
+        funcionario1.cadastrarAluguel(aluguel3);
+        funcionario2.cadastrarAluguel(aluguel4);
 
         // Ler Aluguel
         System.out.println(funcionario2.lerAluguel(2));
@@ -96,20 +107,15 @@ public class Application {
         funcionario2.deletarAluguel(2);
 
         // Valor total de um determindado aluguel
-        System.out.println(funcionario2.valorTotalAluguel(1));
-        System.out.println(cliente2.valorTotalAluguel(2));
+        System.out.println("Valor total do aluguel 1= R$" + funcionario2.valorTotalAluguel(1));
+        System.out.println("Valor total do aluguel 4 = R$" + cliente2.valorTotalAluguel(4));
 
         // Pagar determidado aluguel
         cliente2.pagarAluguel(1);
 
-        System.out.println();
         // Total de Carros Alugados
-        System.out.println("Total de carros alugados = " + carro3.totalCarrosAlugados());
+        System.out.println("Total de carros alugados = " + funcionario1.totalCarrosAlugados());
 
-        // Total de Carros disponiveis
-        carro3.totalCarrosDisp();
-
-        System.out.println();
         // Total de alugueis dos funcionarios
         System.out.println("Total de alugueis do funcionario 1 = " + funcionario1.totalAlugueis());
         System.out.println("Total de alugueis do funcionario 2 = " + funcionario2.totalAlugueis());

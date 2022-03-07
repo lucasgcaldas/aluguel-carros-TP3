@@ -109,6 +109,53 @@ public class Funcionario extends Pessoa {
         return "Pessoa não encontrada!";
     }
 
+    public void cadastrarCarro(Carro carro) {
+        Carro.carroSet.add(carro);
+        System.out.println("O carro " + carro.getModelo() + " foi cadastrado pelo(a) funcionario(a) " + this.getNome());
+    }
+
+    public Carro lerCarro(String placa) {
+        for (Carro carro : Carro.carroSet) {
+            if (placa.equals(carro.getPlaca())) {
+                return carro;
+            }
+        }
+        System.out.println("Carro nao encontrado!");
+        return null;
+    }
+
+    public void atualizaCarro(String placa, Double valorDiaria) {
+        for (Carro carro : Carro.carroSet) {
+            if (placa.equals(carro.getPlaca())) {
+                carro.setValorDiaria(valorDiaria);
+                System.out.println("O valor da diariaria do carro " + carro.getModelo() + " esta atualziado pelo(a) funcionario(a) " + this.getNome());
+            }
+        }
+    }
+
+    public void deletarCarro(String placa) {
+        for (Carro carro : Carro.carroSet) {
+            if (placa.equals(carro.getPlaca())) {
+                System.out.println("O carro " + carro.getModelo() + " foi removido pelo(a) funcionario(a) " + this.getNome());
+                Carro.carroSet.remove(carro);
+                break;
+            }
+        }
+    }
+
+    public int totalCarros() {
+        return Carro.carroSet.size();
+    }
+
+    public int totalCarrosAlugados() {
+        return Aluguel.aluguelList.size();
+    }
+
+    public void totalCarrosDisp() {
+        int totalCarrosAlugados = totalCarrosAlugados();
+        System.out.println("O total de carros disponiveis = " + (totalCarros() - totalCarrosAlugados));
+    }
+
     public int totalAlugueis() {
         int totalAlugueis = 0;
         for (Aluguel aluguel : Aluguel.aluguelList) {

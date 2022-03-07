@@ -18,53 +18,6 @@ public class Carro {
         this.valorDiaria = valorDiaria;
     }
 
-    public void cadastrarCarro() {
-        carroSet.add(this);
-        System.out.println("O carro " + this.getModelo() + " foi cadastrado!");
-    }
-
-    public Carro lerCarro(String placa) {
-        for (Carro carro : carroSet) {
-            if (placa.equals(carro.getPlaca())) {
-                return carro;
-            }
-        }
-        System.out.println("Carro nao encontrado!");
-        return null;
-    }
-
-    public void atualizaCarro(String placa, Double valorDiaria) {
-        for (Carro carro : carroSet) {
-            if (placa.equals(carro.getPlaca())) {
-                carro.setValorDiaria(valorDiaria);
-                System.out.println("O valor da diariaria do carro " + carro.getModelo() + " esta atualziado!");
-            }
-        }
-    }
-
-    public void deletarCarro(String placa) {
-        for (Carro carro : carroSet) {
-            if (placa.equals(carro.getPlaca())) {
-                System.out.println("O carro " + carro.getModelo() + " foi removido!");
-                carroSet.remove(carro);
-                break;
-            }
-        }
-    }
-
-    public int totalCarros() {
-        return carroSet.size();
-    }
-
-    public int totalCarrosAlugados() {
-        return Aluguel.aluguelList.size();
-    }
-
-    public void totalCarrosDisp() {
-        int totalCarrosAlugados = totalCarrosAlugados();
-        System.out.println("O total de carros disponiveis = " + (totalCarros() - totalCarrosAlugados));
-    }
-
     public String getMarca() {
         return marca;
     }
