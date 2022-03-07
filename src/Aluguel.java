@@ -22,55 +22,6 @@ public class Aluguel {
         this.localDevolucao = localDevolucao;
     }
 
-    public void cadastrarAluguel() {
-        aluguelList.add(this);
-        System.out.println("O aluguel " + this.getId() + " foi cadastrado!");
-    }
-
-    public Aluguel lerAluguel(int id) {
-        for (Aluguel aluguel : aluguelList) {
-            if (id == aluguel.getId()) {
-                return aluguel;
-            }
-        }
-        System.out.println("Carro nao encontrado!");
-        return null;
-    }
-
-    public void atualizaAluguel(int id, int totalDias) {
-        for (Aluguel aluguel : aluguelList) {
-            if (id == aluguel.getId()) {
-                aluguel.setTotalDias(totalDias);
-                System.out.println("O total de dias do aluguel " + aluguel.getId() + " esta atualziado!");
-            }
-        }
-    }
-
-    public void deletarAluguel(int id) {
-        for (Aluguel aluguel : aluguelList) {
-            if (id == aluguel.getId()) {
-                System.out.println("O aluguel " + aluguel.getId() + " foi removido!");
-                aluguelList.remove(aluguel);
-                break;
-            }
-        }
-    }
-
-    public Double valorTotal(int id) {
-        for (Aluguel aluguel : aluguelList) {
-            if (id == aluguel.getId()) {
-                return aluguel.getCarro().getValorDiaria() * aluguel.getTotalDias();
-            }
-        }
-        System.out.println("Aluguel invalido");
-        return 0.0;
-    }
-
-    public void pagarAluguel(int id) {
-        Double valor = valorTotal(id);
-        System.out.println("Aluguel de R$" + valor + " foi pago");
-    }
-
     public int getId() {
         return id;
     }
