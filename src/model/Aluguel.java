@@ -1,5 +1,4 @@
-import java.util.ArrayList;
-import java.util.List;
+package model;
 
 public class Aluguel {
 
@@ -10,7 +9,6 @@ public class Aluguel {
     private String localRetirada;
     private int totalDias;
     private String localDevolucao;
-    public static List<Aluguel> aluguelList = new ArrayList<>(); // Lista de alugueis
 
     public Aluguel(int id, Funcionario funcionario, Cliente cliente, Carro carro, String localRetirada, int totalDias, String localDevolucao) {
         this.id = id;
@@ -80,7 +78,7 @@ public class Aluguel {
 
     @Override
     public String toString() {
-        return "Aluguel{" +
+        return "model.Aluguel{" +
                 "id=" + id +
                 ", funcionario=" + funcionario.getNome() +
                 ", cliente=" + cliente.getNome() +

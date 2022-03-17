@@ -1,5 +1,4 @@
-import java.util.HashSet;
-import java.util.Set;
+package model;
 
 public class Carro {
 
@@ -8,7 +7,6 @@ public class Carro {
     private String anoFabricacao;
     private String placa;
     private Double valorDiaria;
-    public static Set<Carro> carroSet = new HashSet<>(); // Set para nao permitir carros duplicados
 
     public Carro(String marca, String modelo, String placa, String anoFabricacao, Double valorDiaria) {
         this.marca = marca;
@@ -60,7 +58,7 @@ public class Carro {
 
     @Override
     public String toString() {
-        return "Carro{" +
+        return "model.Carro{" +
                 "marca='" + marca + '\'' +
                 ", modelo='" + modelo + '\'' +
                 ", anoFabricacao='" + anoFabricacao + '\'' +

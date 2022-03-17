@@ -1,21 +1,14 @@
-import java.util.HashSet;
-import java.util.Set;
+package model;
 
 public class Cliente extends Pessoa {
 
     private String cidade;
     private CatHabEnum categoriaHabilitacao;
-    public static Set<Cliente> clienteSet = new HashSet<>(); // Set para nao permitir clientes duplicados
 
     public Cliente(String nome, String cpf, String email, String senha, String cidade, CatHabEnum categoriaHabilitacao) {
         super(nome, cpf, email, senha);
         this.cidade = cidade;
         this.categoriaHabilitacao = categoriaHabilitacao;
-    }
-
-    public void pagarAluguel(int id) {
-        Double valor = valorTotalAluguel(id);
-        System.out.println("Aluguel de R$" + valor + " foi pago pelo(a) cliente(a) " + this.getNome());
     }
 
     public String getCidade() {
@@ -36,7 +29,7 @@ public class Cliente extends Pessoa {
 
     @Override
     public String toString() {
-        return "Cliente{" +
+        return "model.Cliente{" +
                 "nome=" + this.getNome() +
                 ", cpf=" + this.getCpf() +
                 ", email=" + this.getEmail() +
