@@ -57,24 +57,20 @@ public class MenuView implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         Object src = e.getSource();
 
-        if(src == funcionario){
+        if (src == funcionario) {
             new PessoaView().menuPersonalizado(1);
         }
 
-        if(src == cliente){
+        if (src == cliente) {
             new PessoaView().menuPersonalizado(2);
         }
 
-        if (src == carro){
+        if (src == carro) {
             new CarroView().mostraCarros();
-//            JOptionPane.showMessageDialog(null,
-//                    "Ainda precisam ser implementadas as funcionalidades\n"
-//                            + "relacionadas a curso e a matrícula", null,
-//                    JOptionPane.INFORMATION_MESSAGE);
         }
     }
 
-    public static void carregaDados(){
+    public static void carregaDados() {
         // Carregando dados no sistema
         Cliente cliente1 = new Cliente("Lucas", "123.456.789-10",
                 "lucas@email.com", "1234",

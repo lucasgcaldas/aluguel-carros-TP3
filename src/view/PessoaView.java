@@ -22,13 +22,14 @@ public class PessoaView implements ActionListener, ListSelectionListener {
     private JList<String> listaClientesCadastrados;
     private String[] arrayNomesFuncionario = new String[50];
     private String[] arrayNomesClientes = new String[50];
-
+    private int posicao = 0;
 
     public void menuPersonalizado(int opcao) {
         switch (opcao) {
             case 1 -> {// Mostrar dados de Funcionarios cadastrados (JList)
                 for (int i = 0; i < FuncionarioController.funcionarioList.size(); i++) {
                     arrayNomesFuncionario[i] = FuncionarioController.funcionarioList.get(i).getNome();
+                    posicao = i;
                 }
                 listaFuncionariosCadastrados = new JList<>(arrayNomesFuncionario);
                 janela = new JFrame("Funcionarios");
@@ -56,6 +57,7 @@ public class PessoaView implements ActionListener, ListSelectionListener {
             case 2 -> {// Mostrar dados de Clientes cadastrados (JList)
                 for (int i = 0; i < ClienteController.clienteList.size(); i++) {
                     arrayNomesClientes[i] = ClienteController.clienteList.get(i).getNome();
+                    posicao = i;
                 }
                 listaClientesCadastrados = new JList<>(arrayNomesClientes);
                 janela = new JFrame("Clientes");
@@ -87,11 +89,41 @@ public class PessoaView implements ActionListener, ListSelectionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        Object src = e.getSource();
 
+        //Cadastro de novo aluno
+        if (src == cadastroFuncionario) {
+            new DetalhePessoaView().inserirEditar(1, posicao);
+        }
+
+        //Cadastro de novo professor
+        if (src == cadastroCliente) {
+            new DetalhePessoaView().inserirEditar(2, posicao);
+        }
+
+        // Atualiza a lista de nomes de alunos mostrada no JList
+        if (src == refreshFuncionario) {
+            listaFuncionariosCadastrados.setListData(arrayNomesFuncionario);
+            listaFuncionariosCadastrados.updateUI();
+        }
+
+        // Atualiza a lista de nomes de professores mostrada no JList
+        if (src == refreshCliente) {
+            listaClientesCadastrados.setListData(arrayNomesClientes);
+            listaClientesCadastrados.updateUI();
+        }
     }
 
     @Override
     public void valueChanged(ListSelectionEvent e) {
+        Object src = e.getSource();
+        System.out.println(posicao);
+        if(e.getValueIsAdjusting() && src == listaFuncionariosCadastrados) {
+            new DetalhePessoaView().inserirEditar(3, posicao);
+        }
 
+        if(e.getValueIsAdjusting() && src == listaClientesCadastrados) {
+            new DetalhePessoaView().inserirEditar(4, posicao);
+        }
     }
 }
