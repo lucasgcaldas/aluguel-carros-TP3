@@ -12,9 +12,8 @@ public class ClienteController {
 
     private Cliente cliente;
 
-    public void cadastrarCliente() {
+    public void cadastrarCliente(Cliente cliente) {
         clienteList.add(cliente);
-        System.out.println("O cliente " + cliente.getNome() + " foi cadastrado!");
     }
 
     public Cliente lerPessoa(String cpf) {

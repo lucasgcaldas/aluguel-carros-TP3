@@ -10,9 +10,8 @@ public class CarroController {
 
     public static List<Carro> carroList = new ArrayList<>(); // Lista de Carros
 
-    public void cadastrarCarro(Carro carro, Funcionario funcionario) {
+    public void cadastrarCarro(Carro carro) {
         carroList.add(carro);
-        System.out.println("O carro " + carro.getModelo() + " foi cadastrado pelo(a) funcionario(a) " + funcionario.getNome());
     }
 
     public Carro lerCarro(String placa) {
@@ -25,19 +24,17 @@ public class CarroController {
         return null;
     }
 
-    public void atualizaCarro(String placa, Double valorDiaria, Funcionario funcionario) {
+    public void atualizaCarro(String placa, Double valorDiaria) {
         for (Carro carro : carroList) {
             if (placa.equals(carro.getPlaca())) {
                 carro.setValorDiaria(valorDiaria);
-                System.out.println("O valor da diariaria do carro " + carro.getModelo() + " esta atualziado pelo(a) funcionario(a) " + funcionario.getNome());
             }
         }
     }
 
-    public void deletarCarro(String placa, Funcionario funcionario) {
+    public void deletarCarro(String placa) {
         for (Carro carro : carroList) {
             if (placa.equals(carro.getPlaca())) {
-                System.out.println("O carro " + carro.getModelo() + " foi removido pelo(a) funcionario(a) " + funcionario.getNome());
                 carroList.remove(carro);
                 break;
             }

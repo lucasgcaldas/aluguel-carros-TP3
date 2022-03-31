@@ -11,9 +11,8 @@ public class FuncionarioController {
 
     private Funcionario funcionario;
 
-    public void cadastrarFuncionario() {
+    public void cadastrarFuncionario(Funcionario funcionario) {
         funcionarioList.add(funcionario);
-        System.out.println("O funcionario " + funcionario.getNome() + " foi cadastrado!");
     }
 
     public Funcionario lerFuncionario(String cpf) {
