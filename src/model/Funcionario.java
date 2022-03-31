@@ -11,6 +11,9 @@ public class Funcionario extends Pessoa {
         this.cargo = cargo;
     }
 
+    public Funcionario() {
+    }
+
     public Double getSalario() {
         return salario;
     }

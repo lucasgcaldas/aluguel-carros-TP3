@@ -16,6 +16,9 @@ public abstract class Pessoa {
         this.senha = senha;
     }
 
+    public Pessoa() {
+    }
+
     public Double valorTotalAluguel(int id) {
         for (Aluguel aluguel : AluguelController.aluguelList) {
             if (id == aluguel.getId()) {

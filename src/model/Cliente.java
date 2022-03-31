@@ -11,6 +11,10 @@ public class Cliente extends Pessoa {
         this.categoriaHabilitacao = categoriaHabilitacao;
     }
 
+    public Cliente() {
+
+    }
+
     public String getCidade() {
         return cidade;
     }

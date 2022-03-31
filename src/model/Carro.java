@@ -16,6 +16,10 @@ public class Carro {
         this.valorDiaria = valorDiaria;
     }
 
+    public Carro() {
+
+    }
+
     public String getMarca() {
         return marca;
     }
