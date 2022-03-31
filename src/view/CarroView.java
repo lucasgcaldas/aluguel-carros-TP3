@@ -17,6 +17,7 @@ public class CarroView implements ActionListener, ListSelectionListener {
     private JButton refreshCarro;
     private JList<String> listaCarrosCadastrados;
     private String[] arrayNomesCarros = new String[50];
+    private int posicao = 0;
 
     // Mostrar dados de Carros cadastrados (JList)
     public void mostraCarros() {
@@ -55,11 +56,26 @@ public class CarroView implements ActionListener, ListSelectionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        Object src = e.getSource();
 
+        //Cadastro de novo Carro
+        if (src == cadastroCarro) {
+            new DetalheCarroView().inserirEditar(1, posicao);
+        }
+
+        // Atualiza a lista de nomes de Carro mostrada no JList
+        if (src == refreshCarro) {
+            listaCarrosCadastrados.setListData(arrayNomesCarros);
+            listaCarrosCadastrados.updateUI();
+        }
     }
 
     @Override
     public void valueChanged(ListSelectionEvent e) {
-
+        Object src = e.getSource();
+        if (e.getValueIsAdjusting() && src == listaCarrosCadastrados) {
+            posicao = listaCarrosCadastrados.getSelectedIndex();
+            new DetalheCarroView().inserirEditar(2, posicao);
+        }
     }
 }

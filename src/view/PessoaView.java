@@ -29,7 +29,6 @@ public class PessoaView implements ActionListener, ListSelectionListener {
             case 1 -> {// Mostrar dados de Funcionarios cadastrados (JList)
                 for (int i = 0; i < FuncionarioController.funcionarioList.size(); i++) {
                     arrayNomesFuncionario[i] = FuncionarioController.funcionarioList.get(i).getNome();
-                    posicao = i;
                 }
                 listaFuncionariosCadastrados = new JList<>(arrayNomesFuncionario);
                 janela = new JFrame("Funcionarios");
@@ -57,7 +56,6 @@ public class PessoaView implements ActionListener, ListSelectionListener {
             case 2 -> {// Mostrar dados de Clientes cadastrados (JList)
                 for (int i = 0; i < ClienteController.clienteList.size(); i++) {
                     arrayNomesClientes[i] = ClienteController.clienteList.get(i).getNome();
-                    posicao = i;
                 }
                 listaClientesCadastrados = new JList<>(arrayNomesClientes);
                 janela = new JFrame("Clientes");
@@ -117,12 +115,13 @@ public class PessoaView implements ActionListener, ListSelectionListener {
     @Override
     public void valueChanged(ListSelectionEvent e) {
         Object src = e.getSource();
-        System.out.println(posicao);
-        if(e.getValueIsAdjusting() && src == listaFuncionariosCadastrados) {
+        if (e.getValueIsAdjusting() && src == listaFuncionariosCadastrados) {
+            posicao = listaFuncionariosCadastrados.getSelectedIndex();
             new DetalhePessoaView().inserirEditar(3, posicao);
         }
 
-        if(e.getValueIsAdjusting() && src == listaClientesCadastrados) {
+        if (e.getValueIsAdjusting() && src == listaClientesCadastrados) {
+            posicao = listaClientesCadastrados.getSelectedIndex();
             new DetalhePessoaView().inserirEditar(4, posicao);
         }
     }
