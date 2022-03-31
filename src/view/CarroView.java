@@ -65,6 +65,11 @@ public class CarroView implements ActionListener, ListSelectionListener {
 
         // Atualiza a lista de nomes de Carro mostrada no JList
         if (src == refreshCarro) {
+            for(int i = 0; i < CarroController.carroList.size(); i++){
+                arrayNomesCarros[i] = CarroController.carroList.get(i).getMarca() + " " +CarroController.carroList.get(i).getModelo() + ": " + CarroController.carroList.get(i).getPlaca();
+            }
+
+            listaCarrosCadastrados = new JList<>(arrayNomesCarros);
             listaCarrosCadastrados.setListData(arrayNomesCarros);
             listaCarrosCadastrados.updateUI();
         }

@@ -1,8 +1,7 @@
 package view;
 
 import controller.CarroController;
-import controller.ClienteController;
-import controller.FuncionarioController;
+import model.Carro;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -28,6 +27,8 @@ public class DetalheCarroView implements ActionListener {
     private String seleciona;
     private int opcao = 0;
     private int posicao = 0;
+
+    private CarroController carroController = new CarroController();
 
     public void inserirEditar(int opcao, int posicao) {
 
@@ -108,46 +109,22 @@ public class DetalheCarroView implements ActionListener {
         Object src = e.getSource();
         if (src == botaoSalvar) {
             try {
-                boolean res;
-                if (opcao == 1) { // cadastro de Funcionario
-
-                } else if (opcao == 2) { // cadastro de Cliente
-
-                } else { // Edicao de dado existente
-
-                }
-
-                if (opcao == 1 || opcao == 3) {
-//                    novoDado[2] = valorSenha.getText();
-//                    res = dados.inserirEditarAluno(novoDado);
-                } else {
-//                    novoDado[2] = valorEmail.getText();
-//                    res = dados.inserirEditarProf(novoDado);
-                }
-
-//                if (res) {
-//                    mensagemSucessoCadastro();
-//                } else mensagemErroCadastro();
-
+                Carro carro = new Carro();
+                carro.setModelo(valorModel.getText());
+                carro.setMarca(valorMarca.getText());
+                carro.setPlaca(valorPlaca.getText());
+                carro.setAnoFabricacao(valorAnoFab.getText());
+                carro.setValorDiaria(Double.valueOf(valorValDia.getText()));
+                carroController.cadastrarCarro(carro);
+                mensagemSucessoCadastro();
             } catch (NullPointerException | NumberFormatException exc1) {
                 mensagemErroCadastro();
             }
         }
 
         if (src == botaoExcluir) {
-            boolean res = false;
-
-            if (opcao == 3) {//exclui aluno
-//                res = dados.removerAluno(posicao);
-//                if (res) mensagemSucessoExclusao();
-//                else mensagemErroExclusaoAluno();
-            }
-
-            if (opcao == 4) { //exclui professor
-//                res = dados.removerProfessor(posicao);
-//                if (res) mensagemSucessoExclusao();
-//                else mensagemErroExclusaoProf();
-            }
+            carroController.deletarCarro(CarroController.carroList.get(posicao).getPlaca());
+            mensagemSucessoExclusao();
         }
     }
 

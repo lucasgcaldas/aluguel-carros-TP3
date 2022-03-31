@@ -2,6 +2,10 @@ package view;
 
 import controller.ClienteController;
 import controller.FuncionarioController;
+import model.CargoEnum;
+import model.CatHabEnum;
+import model.Cliente;
+import model.Funcionario;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -37,6 +41,9 @@ public class DetalhePessoaView implements ActionListener {
     private String seleciona;
     private int opcao = 0;
     private int posicao = 0;
+
+    private FuncionarioController funcionarioController = new FuncionarioController();
+    private ClienteController clienteController = new ClienteController();
 
     public void inserirEditar(int opcao, int posicao) {
 
@@ -163,11 +170,32 @@ public class DetalhePessoaView implements ActionListener {
         Object src = e.getSource();
         if (src == botaoSalvar) {
             try {
-                boolean res;
                 if (opcao == 1) { // cadastro de Funcionario
 
+                    Funcionario funcionario = new Funcionario();
+
+                    funcionario.setNome(valorNome.getText());
+                    funcionario.setCpf(valorCPF.getText());
+                    funcionario.setEmail(valorEmail.getText());
+                    funcionario.setSenha(valorSenha.getText());
+                    funcionario.setSalario(Double.valueOf(valorSalario.getText()));
+                    funcionario.setCargo(CargoEnum.valueOf(valorCategoriaHabilitacao.getText()));
+
+                    funcionarioController.cadastrarFuncionario(funcionario);
+                    mensagemSucessoCadastro();
                 } else if (opcao == 2) { // cadastro de Cliente
 
+                    Cliente cliente = new Cliente();
+
+                    cliente.setNome(valorNome.getText());
+                    cliente.setCpf(valorCPF.getText());
+                    cliente.setEmail(valorEmail.getText());
+                    cliente.setSenha(valorSenha.getText());
+                    cliente.setCidade(valorCidade.getText());
+                    cliente.setCategoriaHabilitacao(CatHabEnum.valueOf(valorCategoriaHabilitacao.getText()));
+
+                    clienteController.cadastrarCliente(cliente);
+                    mensagemSucessoCadastro();
                 } else { // Edicao de dado existente
 
                 }
@@ -190,18 +218,14 @@ public class DetalhePessoaView implements ActionListener {
         }
 
         if (src == botaoExcluir) {
-            boolean res = false;
-
-            if (opcao == 3) {//exclui aluno
-//                res = dados.removerAluno(posicao);
-//                if (res) mensagemSucessoExclusao();
-//                else mensagemErroExclusaoAluno();
+            if (opcao == 3) { // exclui funcionario
+                funcionarioController.deletarFuncionario(FuncionarioController.funcionarioList.get(posicao).getCpf());
+                mensagemSucessoExclusao();
             }
 
-            if (opcao == 4) { //exclui professor
-//                res = dados.removerProfessor(posicao);
-//                if (res) mensagemSucessoExclusao();
-//                else mensagemErroExclusaoProf();
+            if (opcao == 4) { // exclui cliente
+                clienteController.deletarCliente(ClienteController.clienteList.get(posicao).getCpf());
+                mensagemSucessoExclusao();
             }
         }
     }

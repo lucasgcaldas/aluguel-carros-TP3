@@ -89,23 +89,23 @@ public class PessoaView implements ActionListener, ListSelectionListener {
     public void actionPerformed(ActionEvent e) {
         Object src = e.getSource();
 
-        //Cadastro de novo aluno
+        // Cadastro de novo Funcionario
         if (src == cadastroFuncionario) {
             new DetalhePessoaView().inserirEditar(1, posicao);
         }
 
-        //Cadastro de novo professor
+        // Cadastro de novo Clientes
         if (src == cadastroCliente) {
             new DetalhePessoaView().inserirEditar(2, posicao);
         }
 
-        // Atualiza a lista de nomes de alunos mostrada no JList
+        // Atualiza a lista de nomes de Funcionarios mostrada no JList
         if (src == refreshFuncionario) {
             listaFuncionariosCadastrados.setListData(arrayNomesFuncionario);
             listaFuncionariosCadastrados.updateUI();
         }
 
-        // Atualiza a lista de nomes de professores mostrada no JList
+        // Atualiza a lista de nomes de Clientes mostrada no JList
         if (src == refreshCliente) {
             listaClientesCadastrados.setListData(arrayNomesClientes);
             listaClientesCadastrados.updateUI();
