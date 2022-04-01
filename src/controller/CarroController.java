@@ -24,21 +24,14 @@ public class CarroController {
         return null;
     }
 
-    public void atualizaCarro(String placa, Double valorDiaria) {
-        for (Carro carro : carroList) {
-            if (placa.equals(carro.getPlaca())) {
-                carro.setValorDiaria(valorDiaria);
-            }
-        }
+    public void atualizaCarro(Carro carro, String placa, Double valorDiaria) {
+        carro.setPlaca(placa);
+        carro.setValorDiaria(valorDiaria);
     }
 
-    public void deletarCarro(String placa) {
-        for (Carro carro : carroList) {
-            if (placa.equals(carro.getPlaca())) {
-                carroList.remove(carro);
-                break;
-            }
-        }
+    public boolean deletarCarro(Carro carro) {
+        carroList.remove(carro);
+        return true;
     }
 
     public int totalCarros() {

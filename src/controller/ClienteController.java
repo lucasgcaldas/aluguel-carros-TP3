@@ -1,7 +1,6 @@
 package controller;
 
 import model.Cliente;
-import model.Funcionario;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,32 +25,15 @@ public class ClienteController {
         return null;
     }
 
-    public void atualizaCliente(String cpf, String novoNome, String novoEmail, String novaSenha) {
-        for (Cliente cliente : clienteList) {
-            if (cpf.equals(cliente.getCpf())) {
-                if (novoNome != null) {
-                    cliente.setNome(novoNome);
-                }
-                if (novoEmail != null) {
-                    cliente.setEmail(novoEmail);
-                }
-                if (novaSenha != null) {
-                    cliente.setSenha(novaSenha);
-                }
-                System.out.println("Os dados do cliente " + cliente.getNome() + " estao atualziados!");
-            }
-        }
+    public void atualizaCliente(Cliente cliente, String novoNome, String novoEmail, String novaSenha) {
+        cliente.setNome(novoNome);
+        cliente.setEmail(novoEmail);
+        cliente.setSenha(novaSenha);
     }
 
-    public String deletarCliente(String cpf) {
-        for (Cliente cliente : clienteList) {
-            if (cpf.equals(cliente.getCpf())) {
-                clienteList.remove(cliente);
-                return "O cliente " + cliente.getNome() + " foi removido!";
-            }
-        }
-
-        return "Cliente não encontrado!";
+    public boolean deletarCliente(Cliente cliente) {
+        clienteList.remove(cliente);
+        return true;
     }
 
     public void pagarAluguel(int id) {

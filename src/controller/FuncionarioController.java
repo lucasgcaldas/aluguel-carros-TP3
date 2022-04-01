@@ -1,6 +1,7 @@
 package controller;
 
-import model.*;
+import model.CargoEnum;
+import model.Funcionario;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,36 +27,17 @@ public class FuncionarioController {
         return null;
     }
 
-    public void atualizaFuncionario(String cpf, String novoNome, String novoEmail, String novaSenha, Double novoSalario, CargoEnum novoCargo) {
-        for (Funcionario funcionario : funcionarioList) {
-            if (cpf.equals(funcionario.getCpf())) {
-                if (novoNome != null) {
-                    funcionario.setNome(novoNome);
-                }
-                if (novoEmail != null) {
-                    funcionario.setEmail(novoEmail);
-                }
-                if (novaSenha != null) {
-                    funcionario.setSenha(novaSenha);
-                }
-                if (novoSalario != null) {
-                    funcionario.setSalario(novoSalario);
-                }
-                if (novoCargo != null) {
-                    funcionario.setCargo(novoCargo);
-                }
-                System.out.println("Os dados do funcionario " + funcionario.getNome() + " estao atualziados!");
-            }
-        }
+    public boolean atualizaFuncionario(Funcionario funcionario, String novoNome, String novoEmail, String novaSenha, Double novoSalario, CargoEnum novoCargo) {
+        funcionario.setNome(novoNome);
+        funcionario.setEmail(novoEmail);
+        funcionario.setSenha(novaSenha);
+        funcionario.setSalario(novoSalario);
+        funcionario.setCargo(novoCargo);
+        return true;
     }
 
-    public String deletarFuncionario(String cpf) {
-        for (Funcionario funcionario : funcionarioList) {
-            if (cpf.equals(funcionario.getCpf())) {
-                funcionarioList.remove(funcionario);
-                return "O funcionario " + funcionario.getNome() + " foi removido!";
-            }
-        }
-        return "Funcionario não encontrado!";
+    public boolean deletarFuncionario(Funcionario funcionario) {
+        funcionarioList.remove(funcionario);
+        return true;
     }
 }
