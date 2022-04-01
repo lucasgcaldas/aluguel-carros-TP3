@@ -106,7 +106,7 @@ public class DetalhePessoaView implements ActionListener {
         valorCPF.setBounds(180, 110, 180, 25);
 
         //Coloca os campos relacionados a endereco se aluno
-        if (opcao == 1 || opcao == 3) {
+        if (opcao == 1) {
             janela.add(labelNome);
             janela.add(valorNome);
             janela.add(labelSenha);
@@ -124,10 +124,26 @@ public class DetalhePessoaView implements ActionListener {
             valorSalario.setBounds(180, 140, 180, 25);
             labelCargo.setBounds(30, 170, 150, 25);
             valorCargo.setBounds(180, 170, 180, 25);
+        } else if (opcao == 3) {
+            janela.add(labelNome);
+            janela.add(valorNome);
+            janela.add(labelSenha);
+            janela.add(valorSenha);
+            janela.add(labelEmail);
+            janela.add(valorEmail);
+            janela.add(labelSalario);
+            janela.add(valorSalario);
+            janela.add(labelCargo);
+            janela.add(valorCargo);
+
+            labelSalario.setBounds(30, 140, 150, 25);
+            valorSalario.setBounds(180, 140, 180, 25);
+            labelCargo.setBounds(30, 170, 150, 25);
+            valorCargo.setBounds(180, 170, 180, 25);
         }
 
         //Coloca campos relacionados a valor hora/aula se professor
-        if (opcao == 2 || opcao == 4) {
+        if (opcao == 2) {
             janela.add(labelNome);
             janela.add(valorNome);
             janela.add(labelSenha);
@@ -145,6 +161,13 @@ public class DetalhePessoaView implements ActionListener {
             valorCidade.setBounds(180, 140, 180, 25);
             labelCategoriaHabilitacao.setBounds(30, 170, 150, 25);
             valorCategoriaHabilitacao.setBounds(180, 170, 180, 25);
+        } else if (opcao == 4) {
+            janela.add(labelNome);
+            janela.add(valorNome);
+            janela.add(labelSenha);
+            janela.add(valorSenha);
+            janela.add(labelEmail);
+            janela.add(valorEmail);
         }
 
         //Coloca botoes de excluir e salvar
@@ -196,22 +219,15 @@ public class DetalhePessoaView implements ActionListener {
 
                     clienteController.cadastrarCliente(cliente);
                     mensagemSucessoCadastro();
-                } else { // Edicao de dado existente
+                } else if (opcao == 3) { // Edicao de dado existente Funcionario
 
+                    funcionarioController.atualizaFuncionario(FuncionarioController.funcionarioList.get(posicao), valorNome.getText(), valorEmail.getText(), valorSenha.getText(), Double.valueOf(valorSalario.getText()), CargoEnum.valueOf(valorCargo.getText()));
+                    mensagemSucessoCadastro();
+                } else if (opcao == 4) { // Edicao de dado existente Cliente
+
+                    clienteController.atualizaCliente(ClienteController.clienteList.get(posicao), valorNome.getText(), valorEmail.getText(), valorSenha.getText());
+                    mensagemSucessoCadastro();
                 }
-
-                if (opcao == 1 || opcao == 3) {
-//                    novoDado[2] = valorSenha.getText();
-//                    res = dados.inserirEditarAluno(novoDado);
-                } else {
-//                    novoDado[2] = valorEmail.getText();
-//                    res = dados.inserirEditarProf(novoDado);
-                }
-
-//                if (res) {
-//                    mensagemSucessoCadastro();
-//                } else mensagemErroCadastro();
-
             } catch (NullPointerException | NumberFormatException exc1) {
                 mensagemErroCadastro();
             }
@@ -219,13 +235,23 @@ public class DetalhePessoaView implements ActionListener {
 
         if (src == botaoExcluir) {
             if (opcao == 3) { // exclui funcionario
-                funcionarioController.deletarFuncionario(FuncionarioController.funcionarioList.get(posicao).getCpf());
-                mensagemSucessoExclusao();
+                boolean res;
+                res = funcionarioController.deletarFuncionario(FuncionarioController.funcionarioList.get(posicao));
+                if (res) {
+                    mensagemSucessoExclusao();
+                } else {
+                    mensagemErroExclusaoPessoa();
+                }
             }
 
             if (opcao == 4) { // exclui cliente
-                clienteController.deletarCliente(ClienteController.clienteList.get(posicao).getCpf());
-                mensagemSucessoExclusao();
+                boolean res;
+                res = clienteController.deletarCliente(ClienteController.clienteList.get(posicao));
+                if (res) {
+                    mensagemSucessoExclusao();
+                } else {
+                    mensagemErroExclusaoPessoa();
+                }
             }
         }
     }
@@ -250,19 +276,9 @@ public class DetalhePessoaView implements ActionListener {
                 JOptionPane.ERROR_MESSAGE);
     }
 
-    public void mensagemErroExclusaoAluno() {
+    public void mensagemErroExclusaoPessoa() {
         JOptionPane.showMessageDialog(null, "Ocorreu um erro ao excluir o dado.\n "
-                        + "Verifique se o aluno está matriculado\n"
-                        + "em alguma disciplina. Se sim, cancele\n "
-                        + "a matricula e tente novamente.", null,
-                JOptionPane.ERROR_MESSAGE);
-    }
-
-    public void mensagemErroExclusaoProf() {
-        JOptionPane.showMessageDialog(null, "Ocorreu um erro ao excluir o dado.\n "
-                        + "Verifique se o professor está responsável\n"
-                        + "por alguma disciplina. Se sim, substitua\n "
-                        + "o professor e tente novamente.", null,
+                        + "Verifique se a pessoa esta cadastrada\n", null,
                 JOptionPane.ERROR_MESSAGE);
     }
 }

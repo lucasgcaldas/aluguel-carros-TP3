@@ -70,7 +70,7 @@ public class DetalheCarroView implements ActionListener {
         valorValDia.setBounds(180, 140, 180, 25);
 
         //Coloca os campos relacionados a endereco se aluno
-        if (opcao == 1 || opcao == 2) {
+        if (opcao == 1) {
             janela.add(labelMarca);
             janela.add(valorMarca);
             janela.add(labelPlaca);
@@ -79,6 +79,15 @@ public class DetalheCarroView implements ActionListener {
             janela.add(valorAnoFab);
             janela.add(labelModel);
             janela.add(valorModel);
+            janela.add(labelValDia);
+            janela.add(valorValDia);
+
+            labelValDia.setBounds(30, 140, 150, 25);
+            valorValDia.setBounds(180, 140, 180, 25);
+        }
+        if (opcao == 2) {
+            janela.add(labelPlaca);
+            janela.add(valorPlaca);
             janela.add(labelValDia);
             janela.add(valorValDia);
 
@@ -109,22 +118,33 @@ public class DetalheCarroView implements ActionListener {
         Object src = e.getSource();
         if (src == botaoSalvar) {
             try {
-                Carro carro = new Carro();
-                carro.setModelo(valorModel.getText());
-                carro.setMarca(valorMarca.getText());
-                carro.setPlaca(valorPlaca.getText());
-                carro.setAnoFabricacao(valorAnoFab.getText());
-                carro.setValorDiaria(Double.valueOf(valorValDia.getText()));
-                carroController.cadastrarCarro(carro);
-                mensagemSucessoCadastro();
+                if (opcao == 1){
+                    Carro carro = new Carro();
+                    carro.setModelo(valorModel.getText());
+                    carro.setMarca(valorMarca.getText());
+                    carro.setPlaca(valorPlaca.getText());
+                    carro.setAnoFabricacao(valorAnoFab.getText());
+                    carro.setValorDiaria(Double.valueOf(valorValDia.getText()));
+                    carroController.cadastrarCarro(carro);
+                    mensagemSucessoCadastro();
+                } else {
+
+                    carroController.atualizaCarro(CarroController.carroList.get(posicao), valorPlaca.getText(), Double.valueOf(valorValDia.getText()));
+                    mensagemSucessoCadastro();
+                }
             } catch (NullPointerException | NumberFormatException exc1) {
                 mensagemErroCadastro();
             }
         }
 
         if (src == botaoExcluir) {
-            carroController.deletarCarro(CarroController.carroList.get(posicao).getPlaca());
-            mensagemSucessoExclusao();
+            boolean res;
+            res = carroController.deletarCarro(CarroController.carroList.get(posicao));
+            if (res) {
+                mensagemSucessoExclusao();
+            } else {
+                mensagemErroExclusaoCarro();
+            }
         }
     }
 
@@ -143,24 +163,13 @@ public class DetalheCarroView implements ActionListener {
     public void mensagemErroCadastro() {
         JOptionPane.showMessageDialog(null, "ERRO AO SALVAR OS DADOS!\n "
                         + "Pode ter ocorrido um dos dois erros a seguir:  \n"
-                        + "1. Nem todos os campos foram preenchidos \n"
-                        + "2. CPF, identidade, DDD e telefone não contém apenas números", null,
+                        + "1. Nem todos os campos foram preenchidos \n", null,
                 JOptionPane.ERROR_MESSAGE);
     }
 
-    public void mensagemErroExclusaoAluno() {
+    public void mensagemErroExclusaoCarro() {
         JOptionPane.showMessageDialog(null, "Ocorreu um erro ao excluir o dado.\n "
-                        + "Verifique se o aluno está matriculado\n"
-                        + "em alguma disciplina. Se sim, cancele\n "
-                        + "a matricula e tente novamente.", null,
-                JOptionPane.ERROR_MESSAGE);
-    }
-
-    public void mensagemErroExclusaoProf() {
-        JOptionPane.showMessageDialog(null, "Ocorreu um erro ao excluir o dado.\n "
-                        + "Verifique se o professor está responsável\n"
-                        + "por alguma disciplina. Se sim, substitua\n "
-                        + "o professor e tente novamente.", null,
+                        + "Verifique se o aluno está cadastrado\n", null,
                 JOptionPane.ERROR_MESSAGE);
     }
 }
