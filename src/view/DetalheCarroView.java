@@ -41,36 +41,26 @@ public class DetalheCarroView implements ActionListener {
         janela = new JFrame(seleciona);
 
         //Preenche dados com dados do Carro clicado
-        if (opcao == 2) {
-            valorMarca = new JTextField(CarroController.carroList.get(posicao).getMarca(), 200);
-            valorModel = new JTextField(CarroController.carroList.get(posicao).getModelo(), 200);
-            valorPlaca = new JTextField(CarroController.carroList.get(posicao).getPlaca(), 200);
-            valorAnoFab = new JTextField(CarroController.carroList.get(posicao).getAnoFabricacao(), 200);
-            valorValDia = new JTextField(CarroController.carroList.get(posicao).getValorDiaria().toString(), 200);
-        } else { //Não preenche com dados
-
+        if (opcao == 1) {
             valorMarca = new JTextField(200);
+            valorModel = new JTextField(200);
             valorPlaca = new JTextField(200);
             valorAnoFab = new JTextField(200);
-            valorModel = new JTextField(200);
             valorValDia = new JTextField(200);
 
+            labelMarca.setBounds(30, 20, 150, 25);
+            valorMarca.setBounds(180, 20, 180, 25);
+            labelPlaca.setBounds(30, 50, 150, 25);
+            valorPlaca.setBounds(180, 50, 180, 25);
+            labelAnoFab.setBounds(30, 80, 180, 25);
+            valorAnoFab.setBounds(180, 80, 180, 25);
+            labelModel.setBounds(30, 110, 150, 25);
+            valorModel.setBounds(180, 110, 180, 25);
+            labelValDia.setBounds(30, 140, 150, 25);
+            valorValDia.setBounds(180, 140, 180, 25);
+
             botaoSalvar.setBounds(245, 205, 115, 30);
-        }
 
-        labelMarca.setBounds(30, 20, 150, 25);
-        valorMarca.setBounds(180, 20, 180, 25);
-        labelPlaca.setBounds(30, 50, 150, 25);
-        valorPlaca.setBounds(180, 50, 180, 25);
-        labelAnoFab.setBounds(30, 80, 180, 25);
-        valorAnoFab.setBounds(180, 80, 180, 25);
-        labelModel.setBounds(30, 110, 150, 25);
-        valorModel.setBounds(180, 110, 180, 25);
-        labelValDia.setBounds(30, 140, 150, 25);
-        valorValDia.setBounds(180, 140, 180, 25);
-
-        //Coloca os campos relacionados a endereco se aluno
-        if (opcao == 1) {
             janela.add(labelMarca);
             janela.add(valorMarca);
             janela.add(labelPlaca);
@@ -82,27 +72,44 @@ public class DetalheCarroView implements ActionListener {
             janela.add(labelValDia);
             janela.add(valorValDia);
 
+            janela.add(botaoSalvar);
+
+        } else if (opcao == 2){ //Não preenche com dados para criar Carro
+
+            valorMarca = new JTextField(CarroController.carroList.get(posicao).getMarca(), 200);
+            valorModel = new JTextField(CarroController.carroList.get(posicao).getModelo(), 200);
+            valorPlaca = new JTextField(CarroController.carroList.get(posicao).getPlaca(), 200);
+            valorAnoFab = new JTextField(CarroController.carroList.get(posicao).getAnoFabricacao(), 200);
+            valorValDia = new JTextField(CarroController.carroList.get(posicao).getValorDiaria().toString(), 200);
+
+            labelMarca.setBounds(30, 20, 150, 25);
+            valorMarca.setBounds(180, 20, 180, 25);
+            labelPlaca.setBounds(30, 50, 150, 25);
+            valorPlaca.setBounds(180, 50, 180, 25);
+            labelAnoFab.setBounds(30, 80, 180, 25);
+            valorAnoFab.setBounds(180, 80, 180, 25);
+            labelModel.setBounds(30, 110, 150, 25);
+            valorModel.setBounds(180, 110, 180, 25);
             labelValDia.setBounds(30, 140, 150, 25);
             valorValDia.setBounds(180, 140, 180, 25);
-        }
-        if (opcao == 2) {
+
+            botaoSalvar.setBounds(120, 210, 115, 30);
+            botaoExcluir.setBounds(245, 210, 115, 30);
+
+            janela.add(labelMarca);
+            janela.add(valorMarca);
             janela.add(labelPlaca);
             janela.add(valorPlaca);
+            janela.add(labelAnoFab);
+            janela.add(valorAnoFab);
+            janela.add(labelModel);
+            janela.add(valorModel);
             janela.add(labelValDia);
             janela.add(valorValDia);
 
-            labelValDia.setBounds(30, 140, 150, 25);
-            valorValDia.setBounds(180, 140, 180, 25);
-        }
-
-        //Coloca botoes de excluir e salvar
-        if (opcao == 2) {
-            botaoSalvar.setBounds(120, 210, 115, 30);
-            botaoExcluir.setBounds(245, 210, 115, 30);
+            janela.add(botaoSalvar);
             janela.add(botaoExcluir);
         }
-
-        janela.add(botaoSalvar);
 
         janela.setLayout(null);
 
