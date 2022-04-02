@@ -1,5 +1,6 @@
 package controller;
 
+import model.CatHabEnum;
 import model.Cliente;
 
 import java.util.ArrayList;
@@ -25,10 +26,11 @@ public class ClienteController {
         return null;
     }
 
-    public void atualizaCliente(Cliente cliente, String novoNome, String novoEmail, String novaSenha) {
+    public void atualizaCliente(Cliente cliente, String novoNome, String novoEmail, String novaSenha, CatHabEnum catHabEnum) {
         cliente.setNome(novoNome);
         cliente.setEmail(novoEmail);
         cliente.setSenha(novaSenha);
+        cliente.setCategoriaHabilitacao(catHabEnum);
     }
 
     public boolean deletarCliente(Cliente cliente) {

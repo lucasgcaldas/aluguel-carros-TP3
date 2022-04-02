@@ -10,6 +10,7 @@ import model.Funcionario;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Objects;
 
 public class DetalhePessoaView implements ActionListener {
 
@@ -17,6 +18,7 @@ public class DetalhePessoaView implements ActionListener {
     private JLabel labelNome = new JLabel("Nome: ");
     private JTextField valorNome;
     private JLabel labelCPF = new JLabel("CPF: ");
+    private JLabel valorCPFLabel;
     private JTextField valorCPF;
     private JLabel labelEmail = new JLabel("Email: ");
     private JTextField valorEmail;
@@ -28,6 +30,8 @@ public class DetalhePessoaView implements ActionListener {
     private JTextField valorSalario;
     private JLabel labelCargo = new JLabel("Cargo: ");
     private JTextField valorCargo;
+    private JComboBox cargoBox;
+    private JComboBox catBox;
 
     // Cliente
     private JLabel labelCidade = new JLabel("Cidade: ");
@@ -45,6 +49,13 @@ public class DetalhePessoaView implements ActionListener {
     private FuncionarioController funcionarioController = new FuncionarioController();
     private ClienteController clienteController = new ClienteController();
 
+    private String[] comboCargo = {CargoEnum.ATENDENTE.name(), CargoEnum.ESTAGIARIO.name(),
+            CargoEnum.GERENTE.name(), CargoEnum.RECEPCIONISTA.name(), CargoEnum.SECRETARIO.name()};
+    private String[] comboHab = {CatHabEnum.A.name(), CatHabEnum.B.name(), CatHabEnum.C.name(),
+            CatHabEnum.AB.name(), CatHabEnum.AC.name()};
+
+    private String boxName;
+
     public void inserirEditar(int opcao, int posicao) {
 
         this.opcao = opcao;
@@ -57,56 +68,37 @@ public class DetalhePessoaView implements ActionListener {
 
         janela = new JFrame(seleciona);
 
-        //Preenche dados com dados do funcionario clicado
-        if (opcao == 3) {
-            valorNome = new JTextField(FuncionarioController.funcionarioList.get(posicao).getNome(), 200);
-            valorSenha = new JTextField(FuncionarioController.funcionarioList.get(posicao).getSenha(), 200);
-            valorEmail = new JTextField(FuncionarioController.funcionarioList.get(posicao).getEmail(), 200);
-            valorCPF = new JTextField(FuncionarioController.funcionarioList.get(posicao).getCpf(), 200);
-            valorSalario = new JTextField(FuncionarioController.funcionarioList.get(posicao).getSalario().toString(), 200);
-            valorCargo = new JTextField(FuncionarioController.funcionarioList.get(posicao).getCargo().toString(), 200);
+        if (opcao == 1) { //Coloca os campos relacionados ao funcionario
 
-            labelSalario.setBounds(30, 140, 150, 25);
-            valorSalario.setBounds(180, 140, 180, 25);
-            labelCargo.setBounds(30, 170, 150, 25);
-            valorCargo.setBounds(180, 170, 180, 25);
-        } else if (opcao == 4) { //Preenche dados com dados do clientes clicado
-            valorNome = new JTextField(ClienteController.clienteList.get(posicao).getNome(), 200);
-            valorSenha = new JTextField(ClienteController.clienteList.get(posicao).getSenha(), 200);
-            valorEmail = new JTextField(ClienteController.clienteList.get(posicao).getEmail(), 200);
-            valorCPF = new JTextField(ClienteController.clienteList.get(posicao).getCpf(), 200);
-            valorCidade = new JTextField(ClienteController.clienteList.get(posicao).getCidade(), 200);
-            valorCategoriaHabilitacao = new JTextField(ClienteController.clienteList.get(posicao).getCategoriaHabilitacao().toString(), 200);
-
-            labelCidade.setBounds(30, 140, 150, 25);
-            valorCidade.setBounds(180, 140, 180, 25);
-            labelCategoriaHabilitacao.setBounds(30, 170, 150, 25);
-            valorCategoriaHabilitacao.setBounds(180, 170, 180, 25);
-        } else { //Não preenche com dados
+            cargoBox = new JComboBox<>(comboCargo);
+            cargoBox.setSelectedItem(1);
+            cargoBox.addActionListener(e -> {
+                JComboBox cb = (JComboBox) e.getSource();
+                boxName = (String) cb.getSelectedItem();
+                System.out.println(boxName);
+            });
 
             valorNome = new JTextField(200);
             valorSenha = new JTextField(200);
             valorEmail = new JTextField(200);
             valorCPF = new JTextField(200);
             valorSalario = new JTextField(200);
-            valorCargo = new JTextField(200);
-            valorCidade = new JTextField(200);
-            valorCategoriaHabilitacao = new JTextField(200);
+
+            labelNome.setBounds(30, 20, 150, 25);
+            valorNome.setBounds(180, 20, 180, 25);
+            labelSenha.setBounds(30, 50, 150, 25);
+            valorSenha.setBounds(180, 50, 180, 25);
+            labelEmail.setBounds(30, 80, 180, 25);
+            valorEmail.setBounds(180, 80, 180, 25);
+            labelCPF.setBounds(30, 110, 150, 25);
+            valorCPF.setBounds(180, 110, 180, 25);
+            labelSalario.setBounds(30, 140, 150, 25);
+            valorSalario.setBounds(180, 140, 180, 25);
+            labelCargo.setBounds(30, 170, 150, 25);
+            cargoBox.setBounds(180, 170, 180, 25);
 
             botaoSalvar.setBounds(245, 205, 115, 30);
-        }
 
-        labelNome.setBounds(30, 20, 150, 25);
-        valorNome.setBounds(180, 20, 180, 25);
-        labelSenha.setBounds(30, 50, 150, 25);
-        valorSenha.setBounds(180, 50, 180, 25);
-        labelEmail.setBounds(30, 80, 180, 25);
-        valorEmail.setBounds(180, 80, 180, 25);
-        labelCPF.setBounds(30, 110, 150, 25);
-        valorCPF.setBounds(180, 110, 180, 25);
-
-        //Coloca os campos relacionados a endereco se aluno
-        if (opcao == 1) {
             janela.add(labelNome);
             janela.add(valorNome);
             janela.add(labelSenha);
@@ -118,32 +110,40 @@ public class DetalhePessoaView implements ActionListener {
             janela.add(labelSalario);
             janela.add(valorSalario);
             janela.add(labelCargo);
-            janela.add(valorCargo);
+            janela.add(cargoBox);
+            janela.add(botaoSalvar);
 
-            labelSalario.setBounds(30, 140, 150, 25);
-            valorSalario.setBounds(180, 140, 180, 25);
-            labelCargo.setBounds(30, 170, 150, 25);
-            valorCargo.setBounds(180, 170, 180, 25);
-        } else if (opcao == 3) {
-            janela.add(labelNome);
-            janela.add(valorNome);
-            janela.add(labelSenha);
-            janela.add(valorSenha);
-            janela.add(labelEmail);
-            janela.add(valorEmail);
-            janela.add(labelSalario);
-            janela.add(valorSalario);
-            janela.add(labelCargo);
-            janela.add(valorCargo);
+        } else if (opcao == 2) { //Coloca os campos relacionados ao cliente
 
-            labelSalario.setBounds(30, 140, 150, 25);
-            valorSalario.setBounds(180, 140, 180, 25);
-            labelCargo.setBounds(30, 170, 150, 25);
-            valorCargo.setBounds(180, 170, 180, 25);
-        }
+            catBox = new JComboBox<>(comboHab);
+            catBox.setSelectedItem(1);
+            catBox.addActionListener(e -> {
+                JComboBox cb = (JComboBox) e.getSource();
+                boxName = (String) cb.getSelectedItem();
+                System.out.println(boxName);
+            });
 
-        //Coloca campos relacionados a valor hora/aula se professor
-        if (opcao == 2) {
+            valorNome = new JTextField(200);
+            valorSenha = new JTextField(200);
+            valorEmail = new JTextField(200);
+            valorCPF = new JTextField(200);
+            valorCidade = new JTextField(200);
+
+            labelNome.setBounds(30, 20, 150, 25);
+            valorNome.setBounds(180, 20, 180, 25);
+            labelSenha.setBounds(30, 50, 150, 25);
+            valorSenha.setBounds(180, 50, 180, 25);
+            labelEmail.setBounds(30, 80, 180, 25);
+            valorEmail.setBounds(180, 80, 180, 25);
+            labelCPF.setBounds(30, 110, 150, 25);
+            valorCPF.setBounds(180, 110, 180, 25);
+            labelCidade.setBounds(30, 140, 150, 25);
+            valorCidade.setBounds(180, 140, 180, 25);
+            labelCategoriaHabilitacao.setBounds(30, 170, 150, 25);
+            catBox.setBounds(180, 170, 180, 25);
+
+            botaoSalvar.setBounds(245, 205, 115, 30);
+
             janela.add(labelNome);
             janela.add(valorNome);
             janela.add(labelSenha);
@@ -155,29 +155,91 @@ public class DetalhePessoaView implements ActionListener {
             janela.add(labelCidade);
             janela.add(valorCidade);
             janela.add(labelCategoriaHabilitacao);
-            janela.add(valorCategoriaHabilitacao);
+            janela.add(catBox);
+            janela.add(botaoSalvar);
 
-            labelCidade.setBounds(30, 140, 150, 25);
-            valorCidade.setBounds(180, 140, 180, 25);
-            labelCategoriaHabilitacao.setBounds(30, 170, 150, 25);
-            valorCategoriaHabilitacao.setBounds(180, 170, 180, 25);
-        } else if (opcao == 4) {
+        } else if (opcao == 3) { //Preenche dados com dados do funcionario clicado
+            valorNome = new JTextField(FuncionarioController.funcionarioList.get(posicao).getNome(), 200);
+            valorSenha = new JTextField(FuncionarioController.funcionarioList.get(posicao).getSenha(), 200);
+            valorEmail = new JTextField(FuncionarioController.funcionarioList.get(posicao).getEmail(), 200);
+            valorCPFLabel = new JLabel(FuncionarioController.funcionarioList.get(posicao).getCpf());
+            valorSalario = new JTextField(FuncionarioController.funcionarioList.get(posicao).getSalario().toString(), 200);
+
+            cargoBox = new JComboBox<>(comboCargo);
+            cargoBox.setSelectedItem(FuncionarioController.funcionarioList.get(posicao).getCargo().toString());
+
+            labelNome.setBounds(30, 20, 150, 25);
+            valorNome.setBounds(180, 20, 180, 25);
+            labelSenha.setBounds(30, 50, 150, 25);
+            valorSenha.setBounds(180, 50, 180, 25);
+            labelEmail.setBounds(30, 80, 180, 25);
+            valorEmail.setBounds(180, 80, 180, 25);
+            labelCPF.setBounds(30, 110, 150, 25);
+            valorCPFLabel.setBounds(180, 110, 180, 25);
+            labelSalario.setBounds(30, 140, 150, 25);
+            valorSalario.setBounds(180, 140, 180, 25);
+            labelCargo.setBounds(30, 170, 150, 25);
+            cargoBox.setBounds(180, 170, 180, 25);
+
             janela.add(labelNome);
             janela.add(valorNome);
             janela.add(labelSenha);
             janela.add(valorSenha);
             janela.add(labelEmail);
             janela.add(valorEmail);
-        }
+            janela.add(labelCPF);
+            janela.add(valorCPFLabel);
+            janela.add(labelSalario);
+            janela.add(valorSalario);
+            janela.add(labelCargo);
+            janela.add(cargoBox);
 
-        //Coloca botoes de excluir e salvar
-        if (opcao == 3 || opcao == 4) {
             botaoSalvar.setBounds(120, 210, 115, 30);
             botaoExcluir.setBounds(245, 210, 115, 30);
+            janela.add(botaoSalvar);
+            janela.add(botaoExcluir);
+
+        } else if (opcao == 4) { //Preenche dados com dados do clientes clicado
+            valorNome = new JTextField(ClienteController.clienteList.get(posicao).getNome(), 200);
+            valorSenha = new JTextField(ClienteController.clienteList.get(posicao).getSenha(), 200);
+            valorEmail = new JTextField(ClienteController.clienteList.get(posicao).getEmail(), 200);
+            valorCPFLabel = new JLabel(ClienteController.clienteList.get(posicao).getCpf());
+            valorCidade = new JTextField(ClienteController.clienteList.get(posicao).getCidade(), 200);
+
+            catBox = new JComboBox<>(comboHab);
+            catBox.setSelectedItem(ClienteController.clienteList.get(posicao).getCategoriaHabilitacao().toString());
+
+            labelNome.setBounds(30, 20, 150, 25);
+            valorNome.setBounds(180, 20, 180, 25);
+            labelSenha.setBounds(30, 50, 150, 25);
+            valorSenha.setBounds(180, 50, 180, 25);
+            labelEmail.setBounds(30, 80, 180, 25);
+            valorEmail.setBounds(180, 80, 180, 25);
+            labelCPF.setBounds(30, 110, 150, 25);
+            valorCPFLabel.setBounds(180, 110, 180, 25);
+            labelCidade.setBounds(30, 140, 150, 25);
+            valorCidade.setBounds(180, 140, 180, 25);
+            labelCategoriaHabilitacao.setBounds(30, 170, 150, 25);
+            catBox.setBounds(180, 170, 180, 25);
+
+            janela.add(labelNome);
+            janela.add(valorNome);
+            janela.add(labelSenha);
+            janela.add(valorSenha);
+            janela.add(labelEmail);
+            janela.add(valorEmail);
+            janela.add(labelCPF);
+            janela.add(valorCPFLabel);
+            janela.add(labelCidade);
+            janela.add(valorCidade);
+            janela.add(labelCategoriaHabilitacao);
+            janela.add(catBox);
+
+            botaoSalvar.setBounds(120, 210, 115, 30);
+            botaoExcluir.setBounds(245, 210, 115, 30);
+            janela.add(botaoSalvar);
             janela.add(botaoExcluir);
         }
-
-        janela.add(botaoSalvar);
 
         janela.setLayout(null);
 
@@ -190,7 +252,8 @@ public class DetalhePessoaView implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        Object src = e.getSource();
+        JButton src = (JButton) e.getSource();
+
         if (src == botaoSalvar) {
             try {
                 if (opcao == 1) { // cadastro de Funcionario
@@ -202,7 +265,7 @@ public class DetalhePessoaView implements ActionListener {
                     funcionario.setEmail(valorEmail.getText());
                     funcionario.setSenha(valorSenha.getText());
                     funcionario.setSalario(Double.valueOf(valorSalario.getText()));
-                    funcionario.setCargo(CargoEnum.valueOf(valorCategoriaHabilitacao.getText()));
+                    funcionario.setCargo(CargoEnum.valueOf(boxName));
 
                     funcionarioController.cadastrarFuncionario(funcionario);
                     mensagemSucessoCadastro();
@@ -215,17 +278,17 @@ public class DetalhePessoaView implements ActionListener {
                     cliente.setEmail(valorEmail.getText());
                     cliente.setSenha(valorSenha.getText());
                     cliente.setCidade(valorCidade.getText());
-                    cliente.setCategoriaHabilitacao(CatHabEnum.valueOf(valorCategoriaHabilitacao.getText()));
+                    cliente.setCategoriaHabilitacao(CatHabEnum.valueOf(boxName));
 
                     clienteController.cadastrarCliente(cliente);
                     mensagemSucessoCadastro();
                 } else if (opcao == 3) { // Edicao de dado existente Funcionario
 
-                    funcionarioController.atualizaFuncionario(FuncionarioController.funcionarioList.get(posicao), valorNome.getText(), valorEmail.getText(), valorSenha.getText(), Double.valueOf(valorSalario.getText()), CargoEnum.valueOf(valorCargo.getText()));
+                    funcionarioController.atualizaFuncionario(FuncionarioController.funcionarioList.get(posicao), valorNome.getText(), valorEmail.getText(), valorSenha.getText(), Double.valueOf(valorSalario.getText()), CargoEnum.valueOf(Objects.requireNonNull(cargoBox.getSelectedItem()).toString()));
                     mensagemSucessoCadastro();
                 } else if (opcao == 4) { // Edicao de dado existente Cliente
 
-                    clienteController.atualizaCliente(ClienteController.clienteList.get(posicao), valorNome.getText(), valorEmail.getText(), valorSenha.getText());
+                    clienteController.atualizaCliente(ClienteController.clienteList.get(posicao), valorNome.getText(), valorEmail.getText(), valorSenha.getText(), CatHabEnum.valueOf(Objects.requireNonNull(catBox.getSelectedItem()).toString()));
                     mensagemSucessoCadastro();
                 }
             } catch (NullPointerException | NumberFormatException exc1) {
