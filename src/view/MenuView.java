@@ -19,6 +19,7 @@ public class MenuView implements ActionListener {
     private static JButton funcionario = new JButton("Funcionario");
     private static JButton cliente = new JButton("Cliente");
     private static JButton carro = new JButton("Carro");
+    private static JButton aluguel = new JButton("Aluguel");
 
     public MenuView() {
         titulo.setFont(new Font("Arial", Font.BOLD, 20));
@@ -29,6 +30,7 @@ public class MenuView implements ActionListener {
         funcionario.setBounds(140, 80, 100, 30);
         cliente.setBounds(140, 130, 100, 30);
         carro.setBounds(140, 180, 100, 30);
+        aluguel.setBounds(140, 230, 100, 30);
 
         janela.setLayout(null);
 
@@ -37,8 +39,9 @@ public class MenuView implements ActionListener {
         janela.add(funcionario);
         janela.add(cliente);
         janela.add(carro);
+        janela.add(aluguel);
 
-        janela.setSize(400, 300);
+        janela.setSize(400, 325);
         janela.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         janela.setVisible(true);
     }
@@ -49,6 +52,7 @@ public class MenuView implements ActionListener {
         cliente.addActionListener(menu);
         funcionario.addActionListener(menu);
         carro.addActionListener(menu);
+        aluguel.addActionListener(menu);
 
         carregaDados(); // carrega dados no sistema de forma automatica
     }
@@ -67,6 +71,10 @@ public class MenuView implements ActionListener {
 
         if (src == carro) {
             new CarroView().mostraCarros();
+        }
+
+        if (src == aluguel) {
+            new AluguelView().mostraAluguel();
         }
     }
 

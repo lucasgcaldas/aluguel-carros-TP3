@@ -20,9 +20,8 @@ public class AluguelController {
         return totalAlugueis;
     }
 
-    public void cadastrarAluguel(Aluguel aluguel, Funcionario funcionario) {
+    public void cadastrarAluguel(Aluguel aluguel) {
         AluguelController.aluguelList.add(aluguel);
-        System.out.println("O aluguel " + aluguel.getId() + " foi cadastrado pelo(a) funcionario(a) " + funcionario.getNome());
     }
 
     public Aluguel lerAluguel(int id) {
@@ -35,22 +34,13 @@ public class AluguelController {
         return null;
     }
 
-    public void atualizaAluguel(int id, int totalDias, Funcionario funcionario) {
-        for (Aluguel aluguel : AluguelController.aluguelList) {
-            if (id == aluguel.getId()) {
-                aluguel.setTotalDias(totalDias);
-                System.out.println("O total de dias do aluguel " + aluguel.getId() + " esta atualziado pelo(a) funcionario(a) " + funcionario.getNome());
-            }
-        }
+    public void atualizaAluguel(Aluguel aluguel, int totalDias, String localDevolucao) {
+        aluguel.setTotalDias(totalDias);
+        aluguel.setLocalDevolucao(localDevolucao);
     }
 
-    public void deletarAluguel(int id, Funcionario funcionario) {
-        for (Aluguel aluguel : AluguelController.aluguelList) {
-            if (id == aluguel.getId()) {
-                System.out.println("O aluguel " + aluguel.getId() + " foi removido pelo(a) funcionario(a) " + funcionario.getNome());
-                AluguelController.aluguelList.remove(aluguel);
-                break;
-            }
-        }
+    public boolean deletarAluguel(Aluguel aluguel) {
+        AluguelController.aluguelList.remove(aluguel);
+        return true;
     }
 }
