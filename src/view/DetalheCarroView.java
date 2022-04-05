@@ -12,10 +12,13 @@ public class DetalheCarroView implements ActionListener {
     private JFrame janela;
     private JLabel labelMarca = new JLabel("Marca: ");
     private JTextField valorMarca;
+    private JLabel valorMarcaLabel;
     private JLabel labelModel = new JLabel("Modelo: ");
     private JTextField valorModel;
+    private JLabel valorModelLabel;
     private JLabel labelAnoFab = new JLabel("Ano Fabricacao: ");
     private JTextField valorAnoFab;
+    private JLabel valorAnoFabLabel;
     private JLabel labelPlaca = new JLabel("Placa: ");
     private JTextField valorPlaca;
     private JLabel labelValDia = new JLabel("Valor Diaria: ");
@@ -76,20 +79,20 @@ public class DetalheCarroView implements ActionListener {
 
         } else if (opcao == 2){ //Não preenche com dados para criar Carro
 
-            valorMarca = new JTextField(CarroController.carroList.get(posicao).getMarca(), 200);
-            valorModel = new JTextField(CarroController.carroList.get(posicao).getModelo(), 200);
+            valorMarcaLabel = new JLabel(CarroController.carroList.get(posicao).getMarca());
+            valorModelLabel = new JLabel(CarroController.carroList.get(posicao).getModelo());
             valorPlaca = new JTextField(CarroController.carroList.get(posicao).getPlaca(), 200);
-            valorAnoFab = new JTextField(CarroController.carroList.get(posicao).getAnoFabricacao(), 200);
+            valorAnoFabLabel = new JLabel(CarroController.carroList.get(posicao).getAnoFabricacao());
             valorValDia = new JTextField(CarroController.carroList.get(posicao).getValorDiaria().toString(), 200);
 
             labelMarca.setBounds(30, 20, 150, 25);
-            valorMarca.setBounds(180, 20, 180, 25);
+            valorMarcaLabel.setBounds(180, 20, 180, 25);
             labelPlaca.setBounds(30, 50, 150, 25);
             valorPlaca.setBounds(180, 50, 180, 25);
             labelAnoFab.setBounds(30, 80, 180, 25);
-            valorAnoFab.setBounds(180, 80, 180, 25);
+            valorAnoFabLabel.setBounds(180, 80, 180, 25);
             labelModel.setBounds(30, 110, 150, 25);
-            valorModel.setBounds(180, 110, 180, 25);
+            valorModelLabel.setBounds(180, 110, 180, 25);
             labelValDia.setBounds(30, 140, 150, 25);
             valorValDia.setBounds(180, 140, 180, 25);
 
@@ -97,13 +100,13 @@ public class DetalheCarroView implements ActionListener {
             botaoExcluir.setBounds(245, 210, 115, 30);
 
             janela.add(labelMarca);
-            janela.add(valorMarca);
+            janela.add(valorMarcaLabel);
             janela.add(labelPlaca);
             janela.add(valorPlaca);
             janela.add(labelAnoFab);
-            janela.add(valorAnoFab);
+            janela.add(valorAnoFabLabel);
             janela.add(labelModel);
-            janela.add(valorModel);
+            janela.add(valorModelLabel);
             janela.add(labelValDia);
             janela.add(valorValDia);
 

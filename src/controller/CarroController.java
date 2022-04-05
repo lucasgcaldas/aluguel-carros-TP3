@@ -42,8 +42,7 @@ public class CarroController {
         return AluguelController.aluguelList.size();
     }
 
-    public void totalCarrosDisp() {
-        int totalCarrosAlugados = totalCarrosAlugados();
-        System.out.println("O total de carros disponiveis = " + (totalCarros() - totalCarrosAlugados));
+    public int totalCarrosDisp() {
+        return (totalCarros() - totalCarrosAlugados());
     }
 }
