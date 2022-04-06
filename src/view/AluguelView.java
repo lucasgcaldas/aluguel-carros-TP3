@@ -1,7 +1,6 @@
 package view;
 
 import controller.AluguelController;
-import controller.CarroController;
 
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
@@ -14,6 +13,7 @@ public class AluguelView implements ActionListener, ListSelectionListener {
 
     private JFrame janela;
     private JLabel titulo;
+    private JLabel totalAlugueis;
     private JButton cadastroAluguel;
     private JButton refreshAluguel;
     private JList<String> listaAlugueisCadastrados;
@@ -24,17 +24,20 @@ public class AluguelView implements ActionListener, ListSelectionListener {
 
     // Mostrar dados de Carros cadastrados (JList)
     public void mostraAluguel() {
-        for(int i = 0; i < AluguelController.aluguelList.size(); i++){
-            arrayNomesAlugueis[i] = "Aluguel " + AluguelController.aluguelList.get(i).getId();
+        for (int i = 0; i < AluguelController.aluguelList.size(); i++) {
+            arrayNomesAlugueis[i] = "Aluguel " + AluguelController.aluguelList.get(i).getId() + " - Valor total R$ " + aluguelController.valorTotalAluguel(AluguelController.aluguelList.get(i));
         }
         listaAlugueisCadastrados = new JList<>(arrayNomesAlugueis);
         janela = new JFrame("Alugueis");
         titulo = new JLabel("Alugueis Cadastrados");
+        totalAlugueis = new JLabel("Total de alugueis: " + aluguelController.totalAlugueis());
         cadastroAluguel = new JButton("Cadastrar");
         refreshAluguel = new JButton("Atualizar");
 
         titulo.setFont(new Font("Arial", Font.BOLD, 20));
+        totalAlugueis.setFont(new Font("Arial", Font.BOLD, 10));
         titulo.setBounds(90, 10, 250, 30);
+        totalAlugueis.setBounds(20, 40, 250, 30);
         listaAlugueisCadastrados.setBounds(20, 100, 350, 120);
         listaAlugueisCadastrados.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
         listaAlugueisCadastrados.setVisibleRowCount(10);
@@ -45,6 +48,7 @@ public class AluguelView implements ActionListener, ListSelectionListener {
         janela.setLayout(null);
 
         janela.add(titulo);
+        janela.add(totalAlugueis);
         janela.add(listaAlugueisCadastrados);
         janela.add(cadastroAluguel);
         janela.add(refreshAluguel);
@@ -68,7 +72,7 @@ public class AluguelView implements ActionListener, ListSelectionListener {
 
         // Atualiza a lista dos nomes dos Alugueis mostrada no JList
         if (src == refreshAluguel) {
-            for(int i = 0; i < AluguelController.aluguelList.size(); i++){
+            for (int i = 0; i < AluguelController.aluguelList.size(); i++) {
                 arrayNomesAlugueis[i] = "Aluguel " + AluguelController.aluguelList.get(i).getId();
             }
 

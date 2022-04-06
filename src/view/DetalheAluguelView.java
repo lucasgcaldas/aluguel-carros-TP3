@@ -4,7 +4,10 @@ import controller.AluguelController;
 import controller.CarroController;
 import controller.ClienteController;
 import controller.FuncionarioController;
-import model.*;
+import model.Aluguel;
+import model.Carro;
+import model.Cliente;
+import model.Funcionario;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -14,7 +17,8 @@ public class DetalheAluguelView implements ActionListener {
 
     private JFrame janela;
     private JLabel labelID = new JLabel("ID: ");
-    private JLabel valorID = new JLabel("Automatico ");;
+    private JLabel valorID = new JLabel("Automatico ");
+    ;
     private JLabel valorIDLabel;
     private JLabel labelFuncionario = new JLabel("Funcionario: ");
     private JTextField valorFuncionario;
@@ -143,7 +147,7 @@ public class DetalheAluguelView implements ActionListener {
 
             janela.add(botaoSalvar);
 
-        } else if (opcao == 2){ //Não preenche com dados para criar Aluguel
+        } else if (opcao == 2) { //Não preenche com dados para criar Aluguel
 
             valorIDLabel = new JLabel(String.valueOf(AluguelController.aluguelList.get(posicao).getId()));
             valorFuncionarioLabel = new JLabel(AluguelController.aluguelList.get(posicao).getFuncionario().getNome());
@@ -204,28 +208,35 @@ public class DetalheAluguelView implements ActionListener {
         Object src = e.getSource();
         if (src == botaoSalvar) {
             try {
-                if (opcao == 1){
+                if (opcao == 1) {
                     Aluguel aluguel = new Aluguel();
                     aluguel.setId(AluguelController.aluguelList.size() + 1);
 
-                    for (Funcionario funcionario : FuncionarioController.funcionarioList){
-                        if(funcionario.getNome().equals(boxNameFuncionario)){
+                    for (Funcionario funcionario : FuncionarioController.funcionarioList) {
+                        if (funcionario.getNome().equals(boxNameFuncionario)) {
                             aluguel.setFuncionario(funcionario);
                             break;
                         }
                     }
 
-                    for (Cliente cliente : ClienteController.clienteList){
-                        if(cliente.getNome().equals(boxNameCliente)){
+                    for (Cliente cliente : ClienteController.clienteList) {
+                        if (cliente.getNome().equals(boxNameCliente)) {
                             aluguel.setCliente(cliente);
                             break;
                         }
                     }
 
-                    for (Carro carro : CarroController.carroList){
-                        if(carro.getModelo().equals(boxNameCarro)){
-                            aluguel.setCarro(carro);
-                            break;
+                    for (Carro carro : CarroController.carroList) {
+                        if (carro.getModelo().equals(boxNameCarro)) {
+                            for (Aluguel aluguel1 : AluguelController.aluguelList) {
+                                if (aluguel1.getCarro().equals(carro)) {
+                                    mensagemErroCarroAlugado();
+                                    inserirEditar(1, posicao);
+                                    break;
+                                } else {
+                                    aluguel.setCarro(carro);
+                                }
+                            }
                         }
                     }
 
@@ -271,6 +282,13 @@ public class DetalheAluguelView implements ActionListener {
         JOptionPane.showMessageDialog(null, "ERRO AO SALVAR OS DADOS!\n "
                         + "Pode ter ocorrido um dos dois erros a seguir:  \n"
                         + "1. Nem todos os campos foram preenchidos \n", null,
+                JOptionPane.ERROR_MESSAGE);
+        janela.dispose();
+    }
+
+    public void mensagemErroCarroAlugado() {
+        JOptionPane.showMessageDialog(null, "ERRO AO CRIAR ALUGUEL!\n "
+                        + "Ese carro nao esta disponivel, tente outro!  \n", null,
                 JOptionPane.ERROR_MESSAGE);
     }
 
