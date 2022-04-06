@@ -37,9 +37,4 @@ public class ClienteController {
         clienteList.remove(cliente);
         return true;
     }
-
-    public void pagarAluguel(int id) {
-        Double valor = cliente.valorTotalAluguel(id);
-        System.out.println("model.Aluguel de R$" + valor + " foi pago pelo(a) cliente(a) " + cliente.getNome());
-    }
 }

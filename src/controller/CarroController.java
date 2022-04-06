@@ -1,7 +1,6 @@
 package controller;
 
 import model.Carro;
-import model.Funcionario;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,7 +1,6 @@
 package controller;
 
 import model.Aluguel;
-import model.Funcionario;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,14 +9,8 @@ public class AluguelController {
 
     public static List<Aluguel> aluguelList = new ArrayList<>(); // Lista de alugueis
 
-    public int totalAlugueis(Funcionario funcionario) {
-        int totalAlugueis = 0;
-        for (Aluguel aluguel : AluguelController.aluguelList) {
-            if (aluguel.getFuncionario().getCpf().equals(funcionario.getCpf())) {
-                totalAlugueis++;
-            }
-        }
-        return totalAlugueis;
+    public int totalAlugueis() {
+        return aluguelList.size();
     }
 
     public void cadastrarAluguel(Aluguel aluguel) {
@@ -42,5 +35,9 @@ public class AluguelController {
     public boolean deletarAluguel(Aluguel aluguel) {
         AluguelController.aluguelList.remove(aluguel);
         return true;
+    }
+
+    public Double valorTotalAluguel(Aluguel aluguel) {
+        return aluguel.getCarro().getValorDiaria() * aluguel.getTotalDias();
     }
 }
