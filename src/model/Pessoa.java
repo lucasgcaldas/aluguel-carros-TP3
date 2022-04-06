@@ -19,16 +19,6 @@ public abstract class Pessoa {
     public Pessoa() {
     }
 
-    public Double valorTotalAluguel(int id) {
-        for (Aluguel aluguel : AluguelController.aluguelList) {
-            if (id == aluguel.getId()) {
-                return aluguel.getCarro().getValorDiaria() * aluguel.getTotalDias();
-            }
-        }
-        System.out.println("model.Aluguel invalido");
-        return 0.0;
-    }
-
     public String getNome() {
         return nome;
     }

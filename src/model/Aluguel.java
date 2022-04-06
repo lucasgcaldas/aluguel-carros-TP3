@@ -20,7 +20,7 @@ public class Aluguel {
         this.localDevolucao = localDevolucao;
     }
 
-    public Aluguel(){
+    public Aluguel() {
 
     }
 
