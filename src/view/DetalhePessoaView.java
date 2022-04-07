@@ -12,6 +12,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Objects;
 
+/**
+ * Classe responsavel por detalhar a view referente aa Pessoa
+ * (Cliente ou Funcionario)
+ *
+ * @author Lucas Gomes - 212005426
+ */
 public class DetalhePessoaView implements ActionListener {
 
     private JFrame janela;
@@ -56,6 +62,16 @@ public class DetalhePessoaView implements ActionListener {
 
     private String boxName;
 
+    /**
+     * Metodo responsavel por selecionar a opcao desejada do usuario
+     * (1) Cadastrar funcionario
+     * (2) Cadastrar cliente
+     * (2) Detalhar funcionario
+     * (2) Detalhar cliente
+     *
+     * @param opcao
+     * @param posicao
+     */
     public void inserirEditar(int opcao, int posicao) {
 
         this.opcao = opcao;
@@ -319,29 +335,48 @@ public class DetalhePessoaView implements ActionListener {
         }
     }
 
+    /**
+     * Metodo responsavel por criar uma janela com mensagem de sucesso
+     * ao excluir os dados
+     */
     public void mensagemSucessoExclusao() {
         JOptionPane.showMessageDialog(null, "Os dados foram excluidos com sucesso!", null,
                 JOptionPane.INFORMATION_MESSAGE);
         janela.dispose();
     }
 
+    /**
+     * Metodo responsavel por criar uma janela com mensagem de sucesso
+     * ao cadastrar os dados
+     */
     public void mensagemSucessoCadastro() {
         JOptionPane.showMessageDialog(null, "Os dados foram salvos com sucesso!", null,
                 JOptionPane.INFORMATION_MESSAGE);
         janela.dispose();
     }
 
+    /**
+     * Metodo responsavel por criar uma janela com mensagem de erro
+     * ao salvar os dados
+     */
     public void mensagemErroCadastro() {
         JOptionPane.showMessageDialog(null, "ERRO AO SALVAR OS DADOS!\n "
                         + "Pode ter ocorrido um dos dois erros a seguir:  \n"
                         + "1. Nem todos os campos foram preenchidos \n"
-                        + "2. CPF, identidade, DDD e telefone não contém apenas números", null,
+                        + "2. String onde deve ser numero \n"
+                        + "3. Numero onde deve ser string \n", null,
                 JOptionPane.ERROR_MESSAGE);
+        janela.dispose();
     }
 
+    /**
+     * Metodo responsavel por criar uma janela com mensagem de erro
+     * ao selecionar uma pessoa invalido
+     */
     public void mensagemErroExclusaoPessoa() {
         JOptionPane.showMessageDialog(null, "Ocorreu um erro ao excluir o dado.\n "
                         + "Verifique se a pessoa esta cadastrada\n", null,
                 JOptionPane.ERROR_MESSAGE);
+        janela.dispose();
     }
 }

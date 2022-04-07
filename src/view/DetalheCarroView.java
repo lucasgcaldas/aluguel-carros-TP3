@@ -7,6 +7,11 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * Classe responsavel por detalhar a view referente ao carro
+ *
+ * @author Lucas Gomes - 212005426
+ */
 public class DetalheCarroView implements ActionListener {
 
     private JFrame janela;
@@ -33,6 +38,14 @@ public class DetalheCarroView implements ActionListener {
 
     private CarroController carroController = new CarroController();
 
+    /**
+     * Metodo responsavel por selecionar a opcao desejada do usuario
+     * (1) Cadastrar carro
+     * (2) Detalhar carro
+     *
+     * @param opcao
+     * @param posicao
+     */
     public void inserirEditar(int opcao, int posicao) {
 
         this.opcao = opcao;
@@ -77,7 +90,7 @@ public class DetalheCarroView implements ActionListener {
 
             janela.add(botaoSalvar);
 
-        } else if (opcao == 2){ //Não preenche com dados para criar Carro
+        } else if (opcao == 2) { //Não preenche com dados para criar Carro
 
             valorMarcaLabel = new JLabel(CarroController.carroList.get(posicao).getMarca());
             valorModelLabel = new JLabel(CarroController.carroList.get(posicao).getModelo());
@@ -128,7 +141,7 @@ public class DetalheCarroView implements ActionListener {
         Object src = e.getSource();
         if (src == botaoSalvar) {
             try {
-                if (opcao == 1){
+                if (opcao == 1) {
                     Carro carro = new Carro();
                     carro.setModelo(valorModel.getText());
                     carro.setMarca(valorMarca.getText());
@@ -158,28 +171,48 @@ public class DetalheCarroView implements ActionListener {
         }
     }
 
+    /**
+     * Metodo responsavel por criar uma janela com mensagem de sucesso
+     * ao excluir os dados
+     */
     public void mensagemSucessoExclusao() {
         JOptionPane.showMessageDialog(null, "Os dados foram excluidos com sucesso!", null,
                 JOptionPane.INFORMATION_MESSAGE);
         janela.dispose();
     }
 
+    /**
+     * Metodo responsavel por criar uma janela com mensagem de sucesso
+     * ao cadastrar os dados
+     */
     public void mensagemSucessoCadastro() {
         JOptionPane.showMessageDialog(null, "Os dados foram salvos com sucesso!", null,
                 JOptionPane.INFORMATION_MESSAGE);
         janela.dispose();
     }
 
+    /**
+     * Metodo responsavel por criar uma janela com mensagem de erro
+     * ao salvar os dados
+     */
     public void mensagemErroCadastro() {
         JOptionPane.showMessageDialog(null, "ERRO AO SALVAR OS DADOS!\n "
                         + "Pode ter ocorrido um dos dois erros a seguir:  \n"
-                        + "1. Nem todos os campos foram preenchidos \n", null,
+                        + "1. Nem todos os campos foram preenchidos \n"
+                        + "2. String onde deve ser numero \n"
+                        + "3. Numero onde deve ser string \n", null,
                 JOptionPane.ERROR_MESSAGE);
+        janela.dispose();
     }
 
+    /**
+     * Metodo responsavel por criar uma janela com mensagem de erro
+     * ao selecionar um carro invalido
+     */
     public void mensagemErroExclusaoCarro() {
         JOptionPane.showMessageDialog(null, "Ocorreu um erro ao excluir o dado.\n "
-                        + "Verifique se o aluno está cadastrado\n", null,
+                        + "Verifique se o carro está cadastrado\n", null,
                 JOptionPane.ERROR_MESSAGE);
+        janela.dispose();
     }
 }

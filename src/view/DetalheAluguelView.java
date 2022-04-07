@@ -13,12 +13,17 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * Classe responsavel por detalhar a view referente ao aluguel
+ *
+ * @author Lucas Gomes - 212005426
+ */
 public class DetalheAluguelView implements ActionListener {
 
     private JFrame janela;
     private JLabel labelID = new JLabel("ID: ");
     private JLabel valorID = new JLabel("Automatico ");
-    ;
+
     private JLabel valorIDLabel;
     private JLabel labelFuncionario = new JLabel("Funcionario: ");
     private JTextField valorFuncionario;
@@ -39,6 +44,7 @@ public class DetalheAluguelView implements ActionListener {
 
     private JButton botaoExcluir = new JButton("Excluir");
     private JButton botaoSalvar = new JButton("Salvar");
+    private JButton botaoPagar = new JButton("Pagar");
 
     private JComboBox funcionarioBox;
     private JComboBox clienteBox;
@@ -57,6 +63,14 @@ public class DetalheAluguelView implements ActionListener {
 
     private AluguelController aluguelController = new AluguelController();
 
+    /**
+     * Metodo responsavel por selecionar a opcao desejada do usuario
+     * (1) Cadastrar aluguel
+     * (2) Detalhar aluguel
+     *
+     * @param opcao
+     * @param posicao
+     */
     public void inserirEditar(int opcao, int posicao) {
 
         this.opcao = opcao;
@@ -172,8 +186,9 @@ public class DetalheAluguelView implements ActionListener {
             labelLocalDevolucao.setBounds(30, 200, 180, 25);
             valorLocalDevolucao.setBounds(180, 200, 180, 25);
 
-            botaoSalvar.setBounds(120, 270, 115, 30);
-            botaoExcluir.setBounds(245, 270, 115, 30);
+            botaoPagar.setBounds(10, 270, 115, 30);
+            botaoSalvar.setBounds(135, 270, 115, 30);
+            botaoExcluir.setBounds(260, 270, 115, 30);
 
             janela.add(labelID);
             janela.add(valorIDLabel);
@@ -192,6 +207,7 @@ public class DetalheAluguelView implements ActionListener {
 
             janela.add(botaoSalvar);
             janela.add(botaoExcluir);
+            janela.add(botaoPagar);
         }
 
         janela.setLayout(null);
@@ -199,6 +215,7 @@ public class DetalheAluguelView implements ActionListener {
         janela.setSize(400, 355);
         janela.setVisible(true);
 
+        botaoPagar.addActionListener(this);
         botaoSalvar.addActionListener(this);
         botaoExcluir.addActionListener(this);
     }
@@ -261,40 +278,71 @@ public class DetalheAluguelView implements ActionListener {
             if (res) {
                 mensagemSucessoExclusao();
             } else {
-                mensagemErroExclusaoCarro();
+                mensagemErroExclusao();
             }
+        }
+
+        if (src == botaoPagar) {
+            String string;
+            string = aluguelController.pagarAluguel(AluguelController.aluguelList.get(posicao).getCliente(), AluguelController.aluguelList.get(posicao));
+            JOptionPane.showMessageDialog(null, string, null, JOptionPane.INFORMATION_MESSAGE);
+            janela.dispose();
         }
     }
 
+    /**
+     * Metodo responsavel por criar uma janela com mensagem de sucesso
+     * ao excluir os dados
+     */
     public void mensagemSucessoExclusao() {
         JOptionPane.showMessageDialog(null, "Os dados foram excluidos com sucesso!", null,
                 JOptionPane.INFORMATION_MESSAGE);
         janela.dispose();
     }
 
+    /**
+     * Metodo responsavel por criar uma janela com mensagem de sucesso
+     * ao cadastrar os dados
+     */
     public void mensagemSucessoCadastro() {
         JOptionPane.showMessageDialog(null, "Os dados foram salvos com sucesso!", null,
                 JOptionPane.INFORMATION_MESSAGE);
         janela.dispose();
     }
 
+    /**
+     * Metodo responsavel por criar uma janela com mensagem de erro
+     * ao salvar os dados
+     */
     public void mensagemErroCadastro() {
         JOptionPane.showMessageDialog(null, "ERRO AO SALVAR OS DADOS!\n "
                         + "Pode ter ocorrido um dos dois erros a seguir:  \n"
-                        + "1. Nem todos os campos foram preenchidos \n", null,
+                        + "1. Nem todos os campos foram preenchidos \n"
+                        + "2. String onde deve ser numero \n"
+                        + "3. Numero onde deve ser string \n", null,
                 JOptionPane.ERROR_MESSAGE);
         janela.dispose();
     }
 
+    /**
+     * Metodo responsavel por criar uma janela com mensagem de erro
+     * ao selecionar um carro que ja esta alugado
+     */
     public void mensagemErroCarroAlugado() {
         JOptionPane.showMessageDialog(null, "ERRO AO CRIAR ALUGUEL!\n "
                         + "Ese carro nao esta disponivel, tente outro!  \n", null,
                 JOptionPane.ERROR_MESSAGE);
+        janela.dispose();
     }
 
-    public void mensagemErroExclusaoCarro() {
+    /**
+     * Metodo responsavel por criar uma janela com mensagem de erro
+     * ao selecionar um aluguel invalido
+     */
+    public void mensagemErroExclusao() {
         JOptionPane.showMessageDialog(null, "Ocorreu um erro ao excluir o dado.\n "
-                        + "Verifique se o aluno está cadastrado\n", null,
+                        + "Verifique se o aluguel está cadastrado\n", null,
                 JOptionPane.ERROR_MESSAGE);
+        janela.dispose();
     }
 }

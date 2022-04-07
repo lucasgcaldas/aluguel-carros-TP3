@@ -1,5 +1,10 @@
 package model;
 
+/**
+ * Classe Carro responsavel por instanciar um carro
+ *
+ * @author Lucas Gomes - 212005426
+ */
 public class Carro {
 
     private String marca;
@@ -8,6 +13,15 @@ public class Carro {
     private String placa;
     private Double valorDiaria;
 
+    /**
+     * Construtor padrao para instanciar carro
+     *
+     * @param marca
+     * @param modelo
+     * @param placa
+     * @param anoFabricacao
+     * @param valorDiaria
+     */
     public Carro(String marca, String modelo, String placa, String anoFabricacao, Double valorDiaria) {
         this.marca = marca;
         this.modelo = modelo;
@@ -16,6 +30,9 @@ public class Carro {
         this.valorDiaria = valorDiaria;
     }
 
+    /**
+     * Construtor vazio
+     */
     public Carro() {
 
     }

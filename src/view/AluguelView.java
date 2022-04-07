@@ -9,20 +9,27 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * Classe responsavel por ser a view referente ao aluguel
+ *
+ * @author Lucas Gomes - 212005426
+ */
 public class AluguelView implements ActionListener, ListSelectionListener {
 
     private JFrame janela;
     private JLabel titulo;
     private JLabel totalAlugueis;
     private JButton cadastroAluguel;
-    private JButton refreshAluguel;
     private JList<String> listaAlugueisCadastrados;
     private String[] arrayNomesAlugueis = new String[50];
     private int posicao = 0;
 
     private AluguelController aluguelController = new AluguelController();
 
-    // Mostrar dados de Carros cadastrados (JList)
+    /**
+     * Metodo responsavel por mostrar dados de alugueis cadastrados
+     * por meio de um JList
+     */
     public void mostraAluguel() {
         for (int i = 0; i < AluguelController.aluguelList.size(); i++) {
             arrayNomesAlugueis[i] = "Aluguel " + AluguelController.aluguelList.get(i).getId() + " - Valor total R$ " + aluguelController.valorTotalAluguel(AluguelController.aluguelList.get(i));
@@ -32,7 +39,6 @@ public class AluguelView implements ActionListener, ListSelectionListener {
         titulo = new JLabel("Alugueis Cadastrados");
         totalAlugueis = new JLabel("Total de alugueis: " + aluguelController.totalAlugueis());
         cadastroAluguel = new JButton("Cadastrar");
-        refreshAluguel = new JButton("Atualizar");
 
         titulo.setFont(new Font("Arial", Font.BOLD, 20));
         totalAlugueis.setFont(new Font("Arial", Font.BOLD, 10));
@@ -42,8 +48,7 @@ public class AluguelView implements ActionListener, ListSelectionListener {
         listaAlugueisCadastrados.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
         listaAlugueisCadastrados.setVisibleRowCount(10);
 
-        cadastroAluguel.setBounds(70, 227, 100, 30);
-        refreshAluguel.setBounds(200, 227, 100, 30);
+        cadastroAluguel.setBounds(140, 227, 100, 30);
 
         janela.setLayout(null);
 
@@ -51,13 +56,11 @@ public class AluguelView implements ActionListener, ListSelectionListener {
         janela.add(totalAlugueis);
         janela.add(listaAlugueisCadastrados);
         janela.add(cadastroAluguel);
-        janela.add(refreshAluguel);
 
         janela.setSize(400, 300);
         janela.setVisible(true);
 
         cadastroAluguel.addActionListener(this);
-        refreshAluguel.addActionListener(this);
         listaAlugueisCadastrados.addListSelectionListener(this);
     }
 
@@ -68,17 +71,6 @@ public class AluguelView implements ActionListener, ListSelectionListener {
         //Cadastro de Aluguel
         if (src == cadastroAluguel) {
             new DetalheAluguelView().inserirEditar(1, posicao);
-        }
-
-        // Atualiza a lista dos nomes dos Alugueis mostrada no JList
-        if (src == refreshAluguel) {
-            for (int i = 0; i < AluguelController.aluguelList.size(); i++) {
-                arrayNomesAlugueis[i] = "Aluguel " + AluguelController.aluguelList.get(i).getId();
-            }
-
-            listaAlugueisCadastrados = new JList<>(arrayNomesAlugueis);
-            listaAlugueisCadastrados.setListData(arrayNomesAlugueis);
-            listaAlugueisCadastrados.updateUI();
         }
     }
 

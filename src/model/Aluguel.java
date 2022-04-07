@@ -1,5 +1,10 @@
 package model;
 
+/**
+ * Classe Aluguel responsavel por instanciar um aluguel
+ *
+ * @author Lucas Gomes - 212005426
+ */
 public class Aluguel {
 
     private int id;
@@ -10,6 +15,17 @@ public class Aluguel {
     private int totalDias;
     private String localDevolucao;
 
+    /**
+     * Construtor padrao para instanciar aluguel
+     *
+     * @param id
+     * @param funcionario
+     * @param cliente
+     * @param carro
+     * @param localRetirada
+     * @param totalDias
+     * @param localDevolucao
+     */
     public Aluguel(int id, Funcionario funcionario, Cliente cliente, Carro carro, String localRetirada, int totalDias, String localDevolucao) {
         this.id = id;
         this.funcionario = funcionario;
@@ -20,6 +36,9 @@ public class Aluguel {
         this.localDevolucao = localDevolucao;
     }
 
+    /**
+     * Construtor vazio
+     */
     public Aluguel() {
 
     }

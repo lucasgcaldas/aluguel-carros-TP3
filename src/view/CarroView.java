@@ -9,6 +9,11 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * Classe responsavel por ser a view referente ao carro
+ *
+ * @author Lucas Gomes - 212005426
+ */
 public class CarroView implements ActionListener, ListSelectionListener {
 
     private JFrame janela;
@@ -16,17 +21,19 @@ public class CarroView implements ActionListener, ListSelectionListener {
     private JLabel totalCarros;
     private JLabel totalCarrosDisp;
     private JButton cadastroCarro;
-    private JButton refreshCarro;
     private JList<String> listaCarrosCadastrados;
     private String[] arrayNomesCarros = new String[50];
     private int posicao = 0;
 
     private CarroController carroController = new CarroController();
 
-    // Mostrar dados de Carros cadastrados (JList)
+    /**
+     * Metodo responsavel por mostrar dados de carros cadastrados
+     * por meio de um JList
+     */
     public void mostraCarros() {
-        for(int i = 0; i < CarroController.carroList.size(); i++){
-            arrayNomesCarros[i] = CarroController.carroList.get(i).getMarca() + " " +CarroController.carroList.get(i).getModelo() + ": " + CarroController.carroList.get(i).getPlaca();
+        for (int i = 0; i < CarroController.carroList.size(); i++) {
+            arrayNomesCarros[i] = CarroController.carroList.get(i).getMarca() + " " + CarroController.carroList.get(i).getModelo() + ": " + CarroController.carroList.get(i).getPlaca();
         }
         listaCarrosCadastrados = new JList<>(arrayNomesCarros);
         janela = new JFrame("Carros");
@@ -34,7 +41,6 @@ public class CarroView implements ActionListener, ListSelectionListener {
         totalCarros = new JLabel("Total de carros: " + carroController.totalCarros());
         totalCarrosDisp = new JLabel("Total de carros disponiveis: " + carroController.totalCarrosDisp());
         cadastroCarro = new JButton("Cadastrar");
-        refreshCarro = new JButton("Atualizar");
 
         titulo.setFont(new Font("Arial", Font.BOLD, 20));
         totalCarros.setFont(new Font("Arial", Font.BOLD, 10));
@@ -46,8 +52,7 @@ public class CarroView implements ActionListener, ListSelectionListener {
         listaCarrosCadastrados.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
         listaCarrosCadastrados.setVisibleRowCount(10);
 
-        cadastroCarro.setBounds(70, 227, 100, 30);
-        refreshCarro.setBounds(200, 227, 100, 30);
+        cadastroCarro.setBounds(140, 227, 100, 30);
 
         janela.setLayout(null);
 
@@ -56,13 +61,11 @@ public class CarroView implements ActionListener, ListSelectionListener {
         janela.add(totalCarrosDisp);
         janela.add(listaCarrosCadastrados);
         janela.add(cadastroCarro);
-        janela.add(refreshCarro);
 
         janela.setSize(400, 300);
         janela.setVisible(true);
 
         cadastroCarro.addActionListener(this);
-        refreshCarro.addActionListener(this);
         listaCarrosCadastrados.addListSelectionListener(this);
     }
 
@@ -73,17 +76,6 @@ public class CarroView implements ActionListener, ListSelectionListener {
         //Cadastro de novo Carro
         if (src == cadastroCarro) {
             new DetalheCarroView().inserirEditar(1, posicao);
-        }
-
-        // Atualiza a lista de nomes de Carro mostrada no JList
-        if (src == refreshCarro) {
-            for(int i = 0; i < CarroController.carroList.size(); i++){
-                arrayNomesCarros[i] = CarroController.carroList.get(i).getMarca() + " " +CarroController.carroList.get(i).getModelo() + ": " + CarroController.carroList.get(i).getPlaca();
-            }
-
-            listaCarrosCadastrados = new JList<>(arrayNomesCarros);
-            listaCarrosCadastrados.setListData(arrayNomesCarros);
-            listaCarrosCadastrados.updateUI();
         }
     }
 

@@ -11,6 +11,11 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * Classe responsavel por criar o menu principal da aplicacao
+ *
+ * @author Lucas Gomes - 212005426
+ */
 public class MenuView implements ActionListener {
 
     private static JFrame janela = new JFrame("Alguel de Carros");
@@ -21,6 +26,10 @@ public class MenuView implements ActionListener {
     private static JButton carro = new JButton("Carro");
     private static JButton aluguel = new JButton("Aluguel");
 
+    /**
+     * Construtor padrao para definir as propriedades dos
+     * componentes utilizados
+     */
     public MenuView() {
         titulo.setFont(new Font("Arial", Font.BOLD, 20));
         escolha.setFont(new Font("Arial", Font.PLAIN, 15));
@@ -46,6 +55,11 @@ public class MenuView implements ActionListener {
         janela.setVisible(true);
     }
 
+    /**
+     * Metodo main responsavel por inicar o sistema
+     *
+     * @param args
+     */
     public static void main(String[] args) {
         MenuView menu = new MenuView();
 
@@ -78,6 +92,9 @@ public class MenuView implements ActionListener {
         }
     }
 
+    /**
+     * Metodo responsavel por carregar dados pre-definidos no sistema ao iniciar
+     */
     public static void carregaDados() {
         // Carregando dados no sistema
         Cliente cliente1 = new Cliente("Lucas", "123.456.789-10",

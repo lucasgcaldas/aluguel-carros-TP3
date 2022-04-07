@@ -1,7 +1,11 @@
 package model;
 
-import controller.AluguelController;
-
+/**
+ * Classe abstrata Pessoa responsavel por ser a classe pai
+ * de Funcionario e Cliente
+ *
+ * @author Lucas Gomes - 212005426
+ */
 public abstract class Pessoa {
 
     private String nome;
@@ -9,6 +13,14 @@ public abstract class Pessoa {
     private String email;
     private String senha;
 
+    /**
+     * Construtor padrao para instanciar pessoa
+     *
+     * @param nome
+     * @param cpf
+     * @param email
+     * @param senha
+     */
     public Pessoa(String nome, String cpf, String email, String senha) {
         this.nome = nome;
         this.cpf = cpf;
@@ -16,7 +28,11 @@ public abstract class Pessoa {
         this.senha = senha;
     }
 
+    /**
+     * Construtor vazio
+     */
     public Pessoa() {
+
     }
 
     public String getNome() {
